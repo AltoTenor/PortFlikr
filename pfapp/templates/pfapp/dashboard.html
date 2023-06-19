@@ -1,0 +1,25 @@
+
+
+{% extends "pfapp/base.html" %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block head %}
+    {% include 'pfapp/messages.html' %}
+{% endblock %}
+
+
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {{user.first_name}} is logged in.
+    {% endif %}
+    <a href="{% url 'pfapp:portfolio' user %}" target="_blank"> Build portfolio </a>
+    <a href="{% url 'pfapp:logout' %}">logout</a>
+
+
+
+    
+{% endblock %}

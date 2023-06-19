@@ -1,13 +1,26 @@
-HI
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portflikr - Generate your portfolio </title>
-</head>
-<body>
-    <a href="{% url 'login' %}"> Login </a>
-    <a href="{%  url 'pfapp:register' %}"> Register </a>
-</body>
-</html>
+
+
+{% extends "pfapp/base.html" %}
+
+
+{% block title %}
+    Generate your portfolio
+{% endblock %}
+
+{% block head %}
+    {% include 'pfapp/messages.html' %}
+    Get started head
+{% endblock %}
+
+
+
+
+{% block content %}
+get started page
+{% if user.is_authenticated %}
+    <a href="{% url 'pfapp:dashboard' %}"> Go to Dashboard. <br></a>       
+{% else %} 
+    <a href="{% url 'login' %}?next={% url 'pfapp:dashboard' %}"> Login </a>
+{%endif%}
+<a href="{%  url 'pfapp:register' %}?next={% url 'pfapp:dashboard' %}"> Register New User </a>
+{% endblock %}

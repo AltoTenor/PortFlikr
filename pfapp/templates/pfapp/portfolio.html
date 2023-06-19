@@ -1,25 +1,17 @@
+
+
 {% extends "pfapp/base.html" %}
 
 {% block head %}
     {% include 'pfapp/messages.html' %}
-    register head
 {% endblock %}
 
 
-
-
 {% block title %}
-Register
+    Portfolio
 {% endblock %}
 
 
 {% block content %}
-register page
-
-
-<form method = "POST" action = "">
-    {% csrf_token %}
-    {{register_form}}
-    <input type="submit" value="Register" />
-</form>
+    PORTFOLIO PAGE for {{usr}}
 {% endblock %}
