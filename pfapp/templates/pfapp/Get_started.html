@@ -1,26 +1,47 @@
 
 
 {% extends "pfapp/base.html" %}
-
+{% load static %}
 
 {% block title %}
     Generate your portfolio
 {% endblock %}
 
 {% block head %}
-    {% include 'pfapp/messages.html' %}
-    Get started head
+    <link href="{% static 'pfapp/getstarted_style.css' %}" rel="stylesheet">
+    
+{% endblock %}
+
+{% block leftside %}
+    <div class="display-4 GS container-fluid text-center">
+        Get Started
+    </div>
+    <div class="desc container text-center">
+        From concept to reality, build your dream
+        portfolio website that effortlessly showcases
+        your skills and leaves a lasting digital
+        footprint
+    </div>
+    <div class="text-center container-fluid">
+        {% if user.is_authenticated %}
+            <a class="loginbtn" href="{% url 'pfapp:dashboard' %}"> Go to Dashboard <br></a>       
+        {% else %} 
+            <a class="loginbtn" href="{% url 'login' %}?next={% url 'pfapp:dashboard' %}"> Login </a>
+        {%endif%}
+    </div>
+    
+    <div class="text-center container-fluid">
+        <a href="{%  url 'pfapp:register' %}?next={% url 'pfapp:dashboard' %}" class="regbtn">Register</a>
+    </div>
+    
+    
 {% endblock %}
 
 
-
-
-{% block content %}
-get started page
-{% if user.is_authenticated %}
-    <a href="{% url 'pfapp:dashboard' %}"> Go to Dashboard. <br></a>       
-{% else %} 
-    <a href="{% url 'login' %}?next={% url 'pfapp:dashboard' %}"> Login </a>
-{%endif%}
-<a href="{%  url 'pfapp:register' %}?next={% url 'pfapp:dashboard' %}"> Register New User </a>
+{% block rightside %}
+    <div class="img1 container-fluid text-center">
+        <img id="img1id" src="{% static 'pfapp/img1.png' %}">
+    </div>
 {% endblock %}
+
+

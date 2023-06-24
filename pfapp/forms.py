@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth.forms import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit,Layout
 from django.urls import reverse_lazy
@@ -36,3 +36,11 @@ class NewUserForm(UserCreationForm):
                 "password1", "password2",
         )
         self.helper.add_input(Submit('submit', 'Register'))
+
+
+
+class DashboardForm(forms.Form):
+    occupation = forms.CharField(label="Occupation",max_length=30,required=False)
+    project_name = forms.CharField(label="Project name",max_length=30,required=False)
+    url = forms.URLField(label="URL for the project",required=False)
+    desc = forms.CharField(label="Description",required=False)

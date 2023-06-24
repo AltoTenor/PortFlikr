@@ -1,0 +1,66 @@
+.GS{
+    color: white;    
+    font-size: 3vmin;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 13%;
+}
+
+.desc{
+    color: white;    
+    font-size:2.5cqh;
+    font-family: 'Inter', sans-serif;
+    margin-top: 12cqh;
+}
+
+
+
+.loginbtn {
+	background-color:#ffffff;
+	border-radius:34px;
+	border:2px solid #0e162e;
+	display:inline-block;
+	cursor:pointer;
+	color:#0e162e;
+	font-family:'Montserrat', sans-serif;
+	font-size:17px;
+	padding:16px 76px;
+	text-decoration:none;
+    margin: 10cqh 0% 0% 0%;
+}
+.loginbtn:hover {
+	background-color:#FED562;
+}
+.loginbtn:active {
+	position:relative;
+	top:1px;
+}
+
+.regbtn {
+	background-color:#ffffff;
+	border-radius:34px;
+	border:2px solid #0e162e;
+	display:inline-block;
+	cursor:pointer;
+	color:#0e162e;
+	font-family:'Montserrat', sans-serif;
+	font-size:17px;
+	padding:16px 76px;
+	text-decoration:none;
+    margin: 5% 0% 0% 0%;
+}
+.regbtn:hover {
+	background-color:#BD5A48;
+}
+.regbtn:active {
+	position:relative;
+	top:1px;
+}
+
+.img1{
+    margin-top: 20%;
+}
+
+#img1id{
+    width: 70vmin;
+    height: auto;
+}

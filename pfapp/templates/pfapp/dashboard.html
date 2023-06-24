@@ -21,5 +21,13 @@
 
 
 
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button name="submit" value="submit"> SUBMIT </button>
+    </form>
+    
+
+
     
 {% endblock %}

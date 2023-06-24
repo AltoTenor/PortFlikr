@@ -1,0 +1,37 @@
+html,body{
+    height: 100%;
+    overflow: hidden;
+}
+
+.row{
+    overflow: hidden;
+}
+
+.mainrow{
+    height: 100%;
+    overflow: hidden;
+}
+.left{
+    background-color: rgb(14, 22, 46);
+}
+
+.right{
+    background-color: white;
+}
+
+.logo_title{
+    padding: 3% 0% 0% 5%;
+    color: rgb(254, 213, 98);
+    font-size: 2em;
+    font-family: 'Alice', serif;
+}
+
+.right{
+    position: relative;
+}
+
+.my_name{
+    position: absolute; 
+    bottom: 0;
+    font-family: 'Poppins', sans-serif;
+}

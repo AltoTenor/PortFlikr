@@ -1,11 +1,10 @@
 {% extends "pfapp/base.html" %}
 
-{% block head %}
-    {% include 'pfapp/messages.html' %}
+{% block messages %}
     
     {% if form.errors %}
         <div class="container-fluid p-0">
-            <div class="alert alert-danger alert-dismissible" role="alert" >
+            <div class="alert alert-danger alert-dismissible" role="alert" style="margin: 0%;">
             Your username and password did not match.
             <button type="button" class="close btn btn-outline-secondary" data-bs-dismiss="alert" aria-label="Close" style="float:right; --bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                 <span aria-hidden="True">X</span>
@@ -17,7 +16,7 @@
     {% if next %}
         {% if user.is_authenticated %}
             <div class="container-fluid p-0">
-                <div class="alert alert-info alert-dismissible" role="alert" >
+                <div class="alert alert-info alert-dismissible" role="alert" style="margin: 0%;">
                     Please Login again.
                 <button type="button" class="close btn btn-outline-secondary" data-bs-dismiss="alert" aria-label="Close" style="float:right; --bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                     <span aria-hidden="True">X</span>
@@ -26,9 +25,9 @@
             </div>
         {% else %}
             <div class="container-fluid p-0">
-                <div class="alert alert-info alert-dismissible" role="alert" >
+                <div class="alert alert-info alert-dismissible" role="alert"  style="margin: 0%;">
                     Please log in to proceed
-                <button type="button" class="close btn btn-outline-secondary" data-bs-dismiss="alert" aria-label="Close" style="float:right; --bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                <button type="button" class="close btn btn-outline-secondary" data-bs-dismiss="alert" aria-label="Close" style=" float:right; --bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                     <span aria-hidden="True">X</span>
                 </button>
                 </div>
