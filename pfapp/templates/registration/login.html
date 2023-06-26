@@ -1,5 +1,6 @@
 {% extends "pfapp/base.html" %}
-
+{% load static %}
+{% load widget_tweaks %}
 {% block messages %}
     
     {% if form.errors %}
@@ -23,21 +24,15 @@
                 </button>
                 </div>
             </div>
-        {% else %}
-            <div class="container-fluid p-0">
-                <div class="alert alert-info alert-dismissible" role="alert"  style="margin: 0%;">
-                    Please log in to proceed
-                <button type="button" class="close btn btn-outline-secondary" data-bs-dismiss="alert" aria-label="Close" style=" float:right; --bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                    <span aria-hidden="True">X</span>
-                </button>
-                </div>
-            </div>
         {% endif %}
     {% endif %}
     
 {% endblock %}
 
-
+{% block head %}
+    <link href="{% static 'pfapp/login.css' %}" rel="stylesheet">
+    
+{% endblock %}
 
 
 {% block title %}
@@ -45,10 +40,43 @@ Login
 {% endblock %}
 
 
-{% block content %}
-    <form method = "POST" action = "">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit" value="Login" />
+{% block rightside %}
+    <div class="display-5 wlcback containter-fluid text-center">
+        Welcome Back
+    </div>
+    <form>
+        
+        
+        <form method = "POST" action = "">
+            {% csrf_token %}
+            <div class="username_class container-fluid">
+                <div class="row">
+                    <div class="col-3">
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            {{ form.username | add_class:'form-control'|attr:"placeholder:User"}}
+                            <label for="id_username">Username</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="password_class container-fluid">
+                <div class="row">
+                    <div class="col-3">
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            {{ form.password | add_class:'form-control'|attr:"placeholder:Pass"}}
+                            <label class="floatlabel" for="id_password">Password</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <input type="submit" class="btn btn-primary"value="Login" />
+          </form>
     </form>
 {% endblock %}
+
