@@ -134,3 +134,5 @@ MESSAGE_TAGS = {
         messages.WARNING: 'alert-warning',
         messages.ERROR: 'alert-danger',
  }
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE=True

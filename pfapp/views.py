@@ -1,12 +1,14 @@
 from django.shortcuts import render,redirect
 from django.views import View
-from .forms import NewUserForm,DashboardForm
+from .forms import NewUserForm,DashboardForm,LoginForm
 from django.contrib.auth import login,logout
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Person,Projects
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LoginView
 
 # Create your views here.
 class Get_started(View):                                 
@@ -79,3 +81,16 @@ def logout_view(request):
 class Portfolio(View):                                 
     def get(self, request , username) :
         return render(request,'pfapp/portfolio.html',{'usr':username})
+
+
+class UpdatedLoginView(LoginView):
+    form_class = LoginForm
+    
+    def form_valid(self, form):
+       
+        remember_me = form.cleaned_data['remember_me']  # get remember me data from cleaned_data of form
+        print(remember_me)
+        if not remember_me:
+            self.request.session.set_expiry(0)  # if remember me is 
+            self.request.session.modified = True
+        return super(UpdatedLoginView, self).form_valid(form)

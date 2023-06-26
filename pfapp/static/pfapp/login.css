@@ -6,11 +6,12 @@
 }
 
 .username_class{
-    margin-top: 9%;
+    margin-top: 5%;
+    margin-left: 10%;
 }
 
 .password_class{
-    margin-top: 3%;
+    margin-top: 1%;
 }
 
 .form-control{
@@ -20,14 +21,14 @@
 input[type=text]{
     overflow: hidden;
     margin-top: 2%;
-    border-radius: 30px;
+    border-radius: 25px;
     text-shadow: none;
     box-shadow: none;
     background-color: #9FD6FD;
 }
 
 input[type=password]{
-    border-radius: 30px;
+    border-radius: 25px;
     text-shadow: none;
     box-shadow: none;
     background-color: #9FD6FD;
@@ -36,27 +37,66 @@ input[type=password]{
 textarea:required:focus,
 input[type="text"]:required:focus,  
 input[type="password"]:required:focus,
-
-.uneditable-input:required:focus{
+uneditable-input:required:focus{
     background-color: rgb(160, 214, 253);
-    border-color: rgba(160, 214, 253); /* green */
-    outline: 0;
+    border-color: #0e162e;
+    outline: 0.5;
     outline: thin dotted \9;
     /* IE6-9 */
 
-   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(160, 214, 253);
-      -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(160, 214, 253);
-           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(160, 214, 253);
+   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 18px rgba(160, 214, 253);
+      -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 18px rgba(160, 214, 253);
+           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 18px rgba(160, 214, 253);
 }
 
 .form-floating>.form-control:focus~label{
     opacity: 0.4;
 }
 .form-floating>.form-control:not(:placeholder-shown)~label{
-    /* background-color: #9FD6FD; */
     opacity: 0.4;
 }
 .form-floating>.form-select~label {
     opacity: 0.4;
 }
 
+.loginbtn {
+	background-color:#0e162e;
+	border-radius:34px;
+	border:2px solid #0e162e;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:'Montserrat', sans-serif;
+	font-size:17px;
+	padding:16px 76px;
+	text-decoration:none;
+    margin: 5% 0% 0% 0%;
+}
+.loginbtn:hover {
+	background-color:#BD5A48;
+}
+.loginbtn:active {
+	position:relative;
+	top:1px;
+}
+
+.reme{
+    padding-left: 30%;
+}
+
+.remandforgot{
+    margin-top: 1%;
+    font-size: 1.5cqmin;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    color: #0e162e;
+}
+
+.img2{
+    margin-top: 20%;
+}
+
+#img2id{
+    width: 80vmin;
+    height: auto;
+}

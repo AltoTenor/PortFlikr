@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.forms import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit,Layout
@@ -44,3 +44,7 @@ class DashboardForm(forms.Form):
     project_name = forms.CharField(label="Project name",max_length=30,required=False)
     url = forms.URLField(label="URL for the project",required=False)
     desc = forms.CharField(label="Description",required=False)
+
+
+class LoginForm(AuthenticationForm):
+    remember_me = forms.BooleanField(required=False)
