@@ -1,0 +1,104 @@
+
+.wlcback{
+    margin-top: 30%;
+    color: #0e162e;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.username_class{
+    margin-top: 5%;
+    margin-left: 10%;
+}
+
+.password_class{
+    margin-top: 1%;
+}
+
+.form-control{
+    margin: 0%;
+}
+
+input[type=text]{
+    overflow: hidden;
+    margin-top: 2%;
+    border-radius: 25px;
+    text-shadow: none;
+    box-shadow: none;
+    background-color: #9FD6FD;
+}
+
+input[type=password]{
+    border-radius: 25px;
+    text-shadow: none;
+    box-shadow: none;
+    background-color: #9FD6FD;
+}
+
+
+textarea:required:focus,
+input[type="text"]:required:focus,  
+input[type="password"]:required:focus,
+input[type="email"]:required:focus,
+uneditable-input:required:focus{
+    background-color: rgb(160, 214, 253);
+    border-color:#9FD6FD;
+    outline: 0.5;
+    outline: thin dotted \9;
+    /* IE6-9 */
+
+   -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075), 0 0 5px rgba(160, 214, 253);
+      -moz-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075), 0 0 5px rgba(160, 214, 253);
+           box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075), 0 0 5px rgba(160, 214, 253);
+}
+
+.form-floating>.form-control:focus~label{
+    opacity: 0.4;
+}
+.form-floating>.form-control:not(:placeholder-shown)~label{
+    opacity: 0.4;
+}
+.form-floating>.form-select~label {
+    opacity: 0.4;
+}
+
+.loginbtn {
+	background-color:#0e162e;
+	border-radius:34px;
+	border:2px solid #0e162e;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:'Montserrat', sans-serif;
+	font-size:17px;
+	padding:16px 76px;
+	text-decoration:none;
+    margin: 5% 0% 0% 0%;
+}
+.loginbtn:hover {
+	background-color:#212e58;
+}
+.loginbtn:active {
+	position:relative;
+	top:1px;
+}
+
+.reme{
+    padding-left: 30%;
+}
+
+.remandforgot{
+    margin-top: 1%;
+    font-size: 1.5cqmin;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    color: #0e162e;
+}
+
+.img2{
+    margin-top: 20%;
+}
+
+#img2id{
+    width: 80vmin;
+    height: auto;
+}

@@ -1,21 +1,12 @@
-
-.wlcback{
-    margin-top: 30%;
-    color: #0e162e;
+.crawaits{
+    margin-top:16%;
+    color: #0e1620;
     font-family: 'Montserrat', sans-serif;
 }
 
-.username_class{
-    margin-top: 5%;
-    margin-left: 10%;
-}
 
-.password_class{
-    margin-top: 1%;
-}
-
-.form-control{
-    margin: 0%;
+.username1_class{
+    margin-top: 3%;
 }
 
 input[type=text]{
@@ -37,16 +28,17 @@ input[type=password]{
 textarea:required:focus,
 input[type="text"]:required:focus,  
 input[type="password"]:required:focus,
+input[type="email"]:required:focus,
 uneditable-input:required:focus{
     background-color: rgb(160, 214, 253);
-    border-color: #0e162e;
+    border-color:#9FD6FD;
     outline: 0.5;
     outline: thin dotted \9;
     /* IE6-9 */
 
-   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 18px rgba(160, 214, 253);
-      -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 18px rgba(160, 214, 253);
-           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 18px rgba(160, 214, 253);
+   -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075), 0 0 5px rgba(160, 214, 253);
+      -moz-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075), 0 0 5px rgba(160, 214, 253);
+           box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075), 0 0 5px rgba(160, 214, 253);
 }
 
 .form-floating>.form-control:focus~label{
@@ -59,7 +51,14 @@ uneditable-input:required:focus{
     opacity: 0.4;
 }
 
-.loginbtn {
+input[type=email]{
+    border-radius: 25px;
+    text-shadow: none;
+    box-shadow: none;
+    background-color: #9FD6FD;
+}
+
+.regbtn {
 	background-color:#0e162e;
 	border-radius:34px;
 	border:2px solid #0e162e;
@@ -70,33 +69,31 @@ uneditable-input:required:focus{
 	font-size:17px;
 	padding:16px 76px;
 	text-decoration:none;
-    margin: 5% 0% 0% 0%;
+    margin: 1% 0% 0% 0%;
 }
-.loginbtn:hover {
-	background-color:#BD5A48;
+.regbtn:hover {
+	background-color:#212e58;
 }
-.loginbtn:active {
+.regbtn:active {
 	position:relative;
 	top:1px;
 }
 
-.reme{
-    padding-left: 30%;
+.img4{
+    margin-top: 10%;
 }
 
-.remandforgot{
-    margin-top: 1%;
-    font-size: 1.5cqmin;
-    font-family: 'Montserrat', sans-serif;
-    text-decoration: none;
-    color: #0e162e;
-}
-
-.img2{
-    margin-top: 20%;
-}
-
-#img2id{
+#img4id{
     width: 80vmin;
     height: auto;
 }
+
+
+.notes{
+    margin-top: 3%;
+    margin-bottom: 7%;
+    font-size: 0.7em;
+    background-color: beige;
+    margin-right: 2vmin;
+}
+

@@ -1,33 +1,26 @@
 
 
-{% extends "pfapp/base.html" %}
-
-{% block title %}
-    Dashboard
-{% endblock %}
-
-{% block head %}
-    {% include 'pfapp/messages.html' %}
-{% endblock %}
-
-
-
-{% block content %}
-    {% if user.is_authenticated %}
-        {{user.first_name}} is logged in.
-    {% endif %}
-    <a href="{% url 'pfapp:portfolio' user %}" target="_blank"> Build portfolio </a>
-    <a href="{% url 'pfapp:logout' %}">logout</a>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Portflikr</title>
+    <link href="{% static 'pfapp/css/dash.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="{% static 'pfapp/img/logo.png' %}" >
+</head>
+<body style="background-color:blue;">
+    <div id="root"></div>
 
 
-
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button name="submit" value="submit"> SUBMIT </button>
-    </form>
+    <div id="loading">
+        <img id="loading-image" src="{% static 'pfapp/img/spinner.svg'%}" alt="Loading..." />
+    </div>
     
-
-
-    
-{% endblock %}
+    <!-- Loading -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> -->
+    <script src="{% static 'pfapp/js/jquery-3.7.0.min.js' %}"></script>
+    <script src="{% static 'pfapp/js/dashboard.js' %}"></script>
+</body>
+</html>

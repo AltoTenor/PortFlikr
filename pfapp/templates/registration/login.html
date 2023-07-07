@@ -30,7 +30,7 @@
 {% endblock %}
 
 {% block head %}
-    <link href="{% static 'pfapp/login.css' %}" rel="stylesheet">
+    <link href="{% static 'pfapp/css/login.css' %}" rel="stylesheet">
     
 {% endblock %}
 
@@ -43,13 +43,13 @@ Login
 
 {% block leftside %}
     <div class="img2 container-fluid text-center">
-        <img id="img2id" src="{% static 'pfapp/img2.png' %}">
+        <img id="img2id" src="{% static 'pfapp/img/img2.png' %}">
     </div>
 {% endblock %}
 
 
 {% block rightside %}
-    <p class="d-md-none d-md-block logo_title"><img src="{% static 'pfapp/logo.png' %}" height="40px" style="padding-bottom:1%;">PortFlikr</p> 
+    <p class="d-md-none d-md-block logo_title"><img src="{% static 'pfapp/img/logo.png' %}" height="40px" style="padding-bottom:1%;">PortFlikr</p> 
 
 
     <div class="display-6 wlcback containter-fluid text-center">
@@ -65,8 +65,8 @@ Login
                     </div>
                     <div class="col-6">
                         <div class="form-floating mb-3">
-                            {{ form.username | add_class:'form-control'|attr:"placeholder:User"}}
-                            <label for="id_username">&nbsp;<img style="height:1.8cqh;" src="{% static 'pfapp/usericon.png' %}" >&nbsp; Username</label>
+                            {{ form.username |remove_attr:"autocomplete"|remove_attr:"autofocus" | add_class:'form-control'|attr:"placeholder:User"|attr:"autocomplete:off"}}
+                            <label for="id_username">&nbsp;<img style="height:1.8cqh;" src="{% static 'pfapp/img/usericon.png' %}" >&nbsp; Username</label>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@ Login
                     <div class="col-6">
                         <div class="form-floating mb-3">
                             {{ form.password | add_class:'form-control'|attr:"placeholder:Pass"}}
-                            <label class="floatlabel" for="id_password">&nbsp;<img style="height:2cqh; padding-bottom:3%" src="{% static 'pfapp/pswdicon.png' %}" >&nbsp;Password</label>
+                            <label class="floatlabel" for="id_password">&nbsp;<img style="height:2cqh; padding-bottom:3%" src="{% static 'pfapp/img/pswdicon.png' %}" >&nbsp;Password</label>
                         </div>
                     </div>
                 </div>
@@ -102,7 +102,7 @@ Login
                     </div>
                 </div>
             </div>
-            <div class="text-center container-fluid">
+            <div class="text-center container-fluid p-0">
                 <input type="submit" class="loginbtn" value="Login" />
             </div>
           </form>
