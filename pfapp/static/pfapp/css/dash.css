@@ -3,8 +3,10 @@ html,body{
     padding: 0;
     width: 100%;
     height: 100%;
-    background-color: aliceblue;
+    background-color: #F6F6F8;
 }
+
+/* Loading */
 #loading {
     position: fixed;
     display: flex;
@@ -21,4 +23,332 @@ html,body{
 
 #loading-image {
     z-index: 100;
+}
+
+
+
+/* Initial Animation */
+.animation-container{
+    width: 100%;
+    height:100%;
+    display: flex;
+    animation-timing-function:ease-in;
+}
+
+.left{
+    animation-delay: 2s;
+    width: 100%;
+    background-color: #0e162e;
+}
+
+.right{
+    width: 100%;
+    background-color: #fff;
+}
+
+
+
+
+
+/* TEMP */
+/* #loading{
+    display: none;
+}
+.animation-container{
+    display: none;
+} */
+/* Display of main > div set to none*/
+
+
+
+
+
+/* Main Page */
+
+/* Basic Structure */
+.main{
+    display: grid;
+    margin: 9px 88px 0 88px;
+    grid-template-columns: 1fr 5fr;
+    /* grid-template-rows: 3fr 10fr 3fr; */
+}
+
+.heading{
+    grid-column: 1/3;
+}
+
+
+
+/* Styling */
+/* Navbar */
+.Nav{
+    display: flex;
+    padding-top: 1rem;
+    background-color: #fff;
+    height: 80px;
+    color: #FED562;
+    font-family: Alice;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+#nav--logo{
+    /* margin-top: 3%; */
+    height: 60px;
+    width: auto;
+}
+
+/* Header */
+.heading{
+    background-color: #F6F6F8;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: #f6f6f8;
+    border-bottom: rgba(0, 0, 0, 0.22);;
+    border-style:solid;
+    align-items: end;
+}
+
+.Info{
+    
+    color: #000;
+    font-family: Aleo,sans-serif;
+    font-size: 30px;
+    /* font-size: 2.1vw; */
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+
+.btn--logout{
+    color: #FFF;
+    text-decoration: none;
+    font-family: Aleo;
+    font-size: 20px;
+    font-weight: 300;
+    margin-top: 0;
+    display: flex;
+    width: 100px;
+    height: 30px;
+    padding: 10px 26px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 100px;
+    background: #BD5A48;
+}
+
+.btn--logout:hover{
+    background: #871400;
+}
+
+
+/* TAB Layout */
+
+.tabs{
+    display: flex;
+    /* background-color: aqua; */
+    flex-direction: column;
+    justify-content: start;
+    margin-right: 20px;
+    margin-top: 50px;
+    /* height: 500px; */
+}
+
+.tab--header{
+    display: flex;
+    border: #f6f6f8;
+    border-bottom: rgba(221, 221, 221, 0.87);
+    border-style: solid;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    
+}
+
+.tab--logo{
+    height: 25px; 
+    margin-right:5px;
+}
+
+h4{
+    padding-left: 1rem;
+    color: #848181;
+    font-family: Alice;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.tabs a{
+    color:#000;
+    text-decoration: none;
+}
+
+.tabs ul{
+    padding: 0;
+    margin-top: 0;
+    list-style: none;
+    margin-left: 0;
+}
+
+
+
+.tabs a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:10px 0;
+    border-radius: 20px;
+    width: 150px;
+    height: 33px;
+    padding: 4px 13px;
+    margin-bottom: 3px;
+    color: #000;
+    text-align: center;
+    font-family: Alice;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/*Not sure */
+.tabs a:hover{
+    background-color: #9FD6FD;
+}
+
+
+
+
+/* Create Button */
+
+.make{
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+.btn--create{
+    color: #FFF;
+    text-decoration: none;
+    font-family: Aleo;
+    font-size: 20px;
+    font-weight: 300;
+    margin-top: 0;
+    display: flex;
+    width: 150px;
+    height: 30px;
+    padding: 10px 26px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 100px;
+    background: #0e162e;
+}
+
+.btn--create:hover{
+    background: #6e92ff;
+}
+
+/* FORM */
+
+input{
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+
+[class^="form"]{
+    margin: 15px;
+}
+
+.formhead{
+    margin-block: 20px;
+    color: #000;
+    text-align: left;
+    font-family: Aleo;
+    font-size: 34px;
+    font-weight: 400;
+}
+
+.actualform{
+    border: rgba(0, 0, 0, 0.22);
+    border-style: dashed;
+    display: grid;
+    padding:20px;
+    grid-template-columns: 1fr 1fr;
+    flex-wrap: wrap;
+    gap: 10px;
+    /* background-color: #6e92ff; */
+    /* height: 70%; */
+}
+
+.full,.half{
+    padding: 20px;
+    color: #5B5B5B;
+    text-align: start;
+    font-family: Alice;
+    font-size: 18px;
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+}
+
+.full{
+    grid-column: 1/3;
+}
+
+
+.formfields{
+    margin-top: 8px;
+    border: #9FD6FD;
+    border-radius: 9px;
+    background: #9FD6FD;
+    width: 100%;
+    height: 2.5rem;
+}
+
+
+.submit-btn-enclosure{
+    border: #f6f6f8;
+    border-top: rgba(0, 0, 0, 0.22);
+    border-style: solid;
+    grid-column: 1/3;
+    display: flex;
+    justify-content: end;
+}
+
+.btn--submit{
+    margin-top: 20px;
+    color: #FFF;
+    text-decoration: none;
+    font-family: Aleo;
+    font-size: 20px;
+    font-weight: 300;
+    display: flex;
+    width: 150px;
+    height: 50px;
+    padding: 10px 26px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 100px;
+    background: #0e162e;
+}
+
+.btn--submit:hover{
+    border: 0;
+    background: #172960;
+}
+
+.desc{
+    padding: 10px;
+    height:100px;
 }

@@ -1,9 +1,11 @@
 from django import forms
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.forms import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit,Layout
 from django.urls import reverse_lazy
+from .models import Person,Projects
 
 
 
@@ -48,3 +50,20 @@ class DashboardForm(forms.Form):
 
 class LoginForm(AuthenticationForm):
     remember_me = forms.BooleanField(required=False)
+
+
+class DashboardFormUser(ModelForm):
+    class Meta:
+        model = User
+        fields = ["first_name","last_name","username", "email"]
+
+class DashboardFormPersonal(ModelForm):
+    class Meta:
+        model = Person
+        fields=['occupation']
+
+
+class DashboardFormProjects(ModelForm):
+    class Meta:
+        model = Projects
+        exclude=['person']

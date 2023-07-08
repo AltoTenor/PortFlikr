@@ -1,5 +1,4 @@
-
-
+{% load widget_tweaks %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -8,10 +7,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Portflikr</title>
     <link href="{% static 'pfapp/css/dash.css' %}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo:wght@400;700&family=Alice&family=Inter:wght@300&family=Montserrat:wght@700&family=Poppins:wght@300&display=swap" rel="stylesheet"> <link rel="shortcut icon" type="image/png" href="{% static 'pfapp/img/logo.png' %}" >
     <link rel="shortcut icon" type="image/png" href="{% static 'pfapp/img/logo.png' %}" >
+    <link rel="icon" type="image/x-icon" href="{% static 'pfapp/img/logo.png' %}">
 </head>
-<body style="background-color:blue;">
-    <div id="root"></div>
+<body>
+    <div class="animation-container">
+        <div class="left">
+        </div>
+        <div class="right">
+        </div>
+    </div>
+
+
+    <div class="Nav">
+        <img id='nav--logo' src="{% static 'pfapp/img/logo.png' %} ">PortFlikr
+    </div>
+
+
+    <div class="main">
+        <div class="heading">
+            <div class="Info">
+                Account Dashboard - {{user.first_name}} {{user.last_name}}
+            </div>
+            <a href="{% url 'pfapp:logout' %}" class="btn--logout">
+                Log Out 
+            </a>
+        </div>
+        <div class="tabs">
+            <div class="tab--profile">
+                <h4 class="tab--header"><img class='tab--logo' src="{% static 'pfapp/img/usericon-gray.png' %}"> Personal </h4>
+                <ul>
+                    <li id="tab--profile--1"><a href="">Profile</a></li>
+                </ul>
+            </div>
+            <div class="tab--projects">
+                <h4 class="tab--header"><img class='tab--logo' src="{% static 'pfapp/img/project-gray.png' %}"> Projects </h4>
+                <ul>
+                    {% for p in projects %}
+                        <li id="tab--projects--{{p.project_name}}"><a href="">{{p.project_name}}</a></li>
+                    {% endfor %}
+                    <!-- <li id="tab--projects--1"><a href="">Project 1</a></li>
+                    <li id="tab--projects--2"><a href="">Project 2</a></li>
+                    <li id="tab--projects--3"><a href="">Project 3</a></li>
+                    <li id="tab--projects--4"><a href="">Project 4</a></li> -->
+                </ul>
+            </div>
+        </div>
+
+
+
+
+        <div class="forms-first">
+            <div class="formhead">Profile Settings</div>
+            <form class="actualform" method = "POST" action = "">
+                {% csrf_token %}
+                <div class="half">
+                    First Name
+                    {% render_field user_form.first_name placeholder=user.first_name class="formfields" %}
+                </div>
+                <div class="half">
+                    Last Name
+                    {% render_field user_form.last_name placeholder=user.last_name class="formfields" %}
+                </div>
+                <div class="full">
+                    Username
+                    {% render_field user_form.username placeholder=user.username class="formfields" %}
+                </div>
+                <div class="full">
+                    Email
+                    {% render_field user_form.email placeholder=user.email class="formfields" %}
+                </div>
+                <div class="full">
+                    Occupation
+                    {% render_field personal_form.occupation placeholder=user.person.occupation class="formfields" %}
+                </div>
+                <div class="submit-btn-enclosure">
+                    <input type="submit" class="btn--submit" value="Update" />
+                </div>
+            </form>
+        </div>
+
+        {% for p in projects %}
+        <div class="forms-{{p.pk}}">
+            <div class="formhead">Project Settings</div>
+            <form class="actualform" method = "POST" action = "">
+                    {% csrf_token %}
+                    <input type="hidden" name="projectID" value="{{p.pk}}">
+                    <div class="full">
+                        {% render_field projects_form.project_name placeholder=p.project_name class="formfields" %}
+                    </div>
+                    <div class="full">
+                        Link to Project
+                        {% render_field projects_form.url placeholder=p.url class="formfields" %}
+                    </div>
+                    <div class="full">
+                        Description
+                        {% render_field projects_form.desc placeholder=p.desc class="formfields desc" %}
+                    </div>
+                    <div class="submit-btn-enclosure">
+                        <input type="submit" class="btn--submit" value="Update" />
+                    </div>
+                </form>
+            </div>
+        {%endfor%}
+        
+
+
+        <div class="make">
+            <a href="#" class="btn--create">
+                Create Portfolio 
+            </a>
+        </div>
+    </div>
+
+    <div class="temp">
+
+
+
+
+    </div>
+
+
+
+
+
+
+
 
 
     <div id="loading">
@@ -20,7 +144,8 @@
     
     <!-- Loading -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> -->
-    <script src="{% static 'pfapp/js/jquery-3.7.0.min.js' %}"></script>
-    <script src="{% static 'pfapp/js/dashboard.js' %}"></script>
 </body>
+    <script src="{% static 'pfapp/js/jquery-3.7.0.min.js' %}"></script>
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="{% static 'pfapp/js/dashboard.js' %}"></script>
 </html>

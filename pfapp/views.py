@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.views import View
-from .forms import NewUserForm,DashboardForm,LoginForm
+from .forms import NewUserForm,DashboardForm,LoginForm,DashboardFormPersonal,DashboardFormProjects,DashboardFormUser
 from django.contrib.auth import login,logout
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -50,11 +50,15 @@ class Register(View):
 # DASHBOARD VIEW
 class Dashboard(LoginRequiredMixin,View):                                 
     def get(self, request) :
-        old_form=request.session.get('old_form',{})
-        form = DashboardForm(initial=old_form)
-        if (old_form):
-            del(request.session['old_form'])
-        return render(request,'pfapp/dashboard.html',{'form':form})
+        # form = DashboardForm(initial=old_form)
+        user_form=DashboardFormUser()
+        personal_form=DashboardFormPersonal()
+        projects_form=DashboardFormProjects()
+        user_info=User.objects.get(username=request.user)
+        # print()
+        projects=user_info.person.projects_set.all()
+        ctx={'user_form':user_form,"personal_form":personal_form,'projects_form':projects_form,"user":user_info,"projects":projects}
+        return render(request,'pfapp/dashboard.html',ctx)
     
     def post(self,request):
         form=DashboardForm(request.POST)
