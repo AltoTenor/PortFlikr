@@ -61,27 +61,70 @@ class Dashboard(LoginRequiredMixin,View):
         return render(request,'pfapp/dashboard.html',ctx)
     
     def post(self,request):
-        form=DashboardForm(request.POST)
-
-        if form.is_valid():
-            formcleaned=form.cleaned_data
-            user_info = User.objects.get(username=request.user)
-
-            # Adding Occupation
-            person_info=Person.objects.filter(user=user_info)
-            if (formcleaned['occupation']!=''):
-                person_info.update(occupation=formcleaned['occupation'])
-
-            #Adding Project Details
-            person_obj=Person.objects.get(user=user_info)
-            person_obj.projects_set.create(project_name=formcleaned['project_name'],url=formcleaned['url'],desc=formcleaned['desc'])
-
-        else:
-            
-            request.session['old_form']=form.cleaned_data
+        proj=request.POST.get('projectID')
+        if (request.POST.get('btn--delete')):
+            request.user.person.projects_set.get(pk=proj).delete()
             return redirect(request.path)
-        # print(form.cleaned_data)
-        return redirect(reverse_lazy('pfapp:Get_started'))
+
+
+        form1=DashboardFormUser(request.POST)
+        form2=DashboardFormPersonal(request.POST)
+        form3=DashboardFormProjects(request.POST)
+        form1.is_valid()
+        form2.is_valid()
+        form3.is_valid()
+        cleaned1=form1.cleaned_data
+        cleaned2=form2.cleaned_data
+        cleaned3=form3.cleaned_data
+        # print(request.POST.get('projectID'))
+        
+
+        #Handling Persons
+        if (proj=="-1"):
+            print(cleaned1)
+            request.user.first_name=cleaned1['first_name']
+            request.user.last_name=cleaned1['last_name']
+            request.user.email=cleaned1['email']
+            if 'username' in cleaned1:
+                request.user.username=cleaned1['username']
+            # print(request.user)
+            request.user.person.occupation=cleaned2['occupation']
+            request.user.person.save()
+            request.user.save()
+        #Handling Projects
+        elif (proj!="new"):
+            projid=request.user.person.projects_set.get(pk=proj)
+            print(projid)
+            projid.project_name=cleaned3['project_name']
+            projid.url=cleaned3['url']
+            if (cleaned3['desc']!=''): 
+                projid.desc=cleaned3['desc']
+            projid.save()
+        else:
+            request.user.person.projects_set.create(project_name=cleaned3['project_name'],url=cleaned3['url'],desc=cleaned3['desc'])
+
+        return redirect(request.path)
+
+
+        # if form.is_valid():
+        #     formcleaned=form.cleaned_data
+        #     user_info = User.objects.get(username=request.user)
+
+        #     # Adding Occupation
+        #     person_info=Person.objects.filter(user=user_info)
+        #     if (formcleaned['occupation']!=''):
+        #         person_info.update(occupation=formcleaned['occupation'])
+
+        #     #Adding Project Details
+        #     person_obj=Person.objects.get(user=user_info)
+        #     person_obj.projects_set.create(project_name=formcleaned['project_name'],url=formcleaned['url'],desc=formcleaned['desc'])
+
+        # else:
+            
+        #     request.session['old_form']=form.cleaned_data
+        #     return redirect(request.path)
+        # # print(form.cleaned_data)
+        # return redirect(reverse_lazy('pfapp:Get_started'))
     
 
 
@@ -95,7 +138,7 @@ def logout_view(request):
 # PORTFOLIO VIEW
 class Portfolio(View):                                 
     def get(self, request , username) :
-        return render(request,'pfapp/portfolio.html',{'usr':username})
+        return render(request,'pfapp/portfolio.html',{'user':request.user})
 
 
 

@@ -5,33 +5,47 @@ var animationtime_first_left=500;
 var animationtime_bounce=100;
 var bouncedist=((1).toString()+'%');
 
-$(window).on('load', function () {
+
+if (sessionStorage.getItem("animationshown")!=='1'){
+    $(window).on('load', function () {
+        $('#loading').hide();
+        $('.Nav').hide();
+        $('.heading').hide();
+        $('.tabs').hide();
+        $('[class^="forms-"]').hide();
+        $('.make').hide();
+    
+    
+        //Screen Bouncing
+        $('.left').animate({
+            'width':'0'
+        },animationtime_first_left,'swing');
+        $('.left').animate({
+            'width':bouncedist
+        },animationtime_bounce);
+        $('.left').animate({
+            'width':'0'
+        },animationtime_bounce,'easeOutBounce',hidingandshowing);
+    }) 
+    
+}
+else{
     $('#loading').hide();
     $('.Nav').hide();
     $('.heading').hide();
     $('.tabs').hide();
     $('[class^="forms-"]').hide();
     $('.make').hide();
-
-
-    //Screen Bouncing
-    $('.left').animate({
-        'width':'0'
-    },animationtime_first_left,'swing');
-    $('.left').animate({
-        'width':bouncedist
-    },animationtime_bounce);
-    $('.left').animate({
-        'width':'0'
-    },animationtime_bounce,'easeOutBounce',hidingandshowing);
-}) 
-
+    hidingandshowing();
+}
 
 //Transition Animations
 function hidingandshowing(){
     $('.animation-container').hide();
     $('.main').fadeIn(300,showlogo);
 }
+
+
 
 
 //Sequence of Fading Divs
@@ -48,6 +62,8 @@ function showheader(){
 function showtabs(){
     $('.tabs').fadeIn(div_fade_time);
     $('.forms-first').fadeIn(div_fade_time,showcreate);
+    let required_tabid=`#tab--profile--1 a`;
+    $(required_tabid).css("background-color", "#9FD6FD")
 }
 
 function showcreate(){
@@ -55,10 +71,61 @@ function showcreate(){
     console.log("hello");
 }
 
-
-
+//Animation Cancel
+$('[class^="btn--"]').on('click',()=>{
+    sessionStorage.setItem("animationshown",1);
+})
 
 
 
 //Tab Selection
+
+//Make as Reusable as possible
+
+function hideall(){
+    //Hiding all forms
+    $('[class^="forms-"]').hide();
+    //Setting BG color of add to black
+    $("#tab--projects-new a").css("background-image","url(../static/pfapp/img/add-black.png)")
+    //Setting BG color of all other tab links to white
+    $('.tabs a').css("background-color", "#F6F6F8");
+}
+
+
+//CASE: Profile is clicked
+$('[class^="tab--profile"] a').on('click',(e)=>{
+    let pid=e.target.className;
+    hideall();
+    //For Profile 1 hardcoded
+    if (pid==-1) {
+        $(".forms-first").show();
+        let required_tabid=`#tab--profile--1 a`;
+        $(required_tabid).css("background-color", "#9FD6FD")
+    }
+    return false;
+})
+
+
+
+//CASE: Projects is clicked
+$('[class^="tab--projects"] a').click((e)=>{
+    let pid=e.target.className;
+    hideall();
+    let required_formclass=`.forms-proj-${pid}`
+    console.log(required_formclass+" clicked");
+    //Showing Required form
+    $(required_formclass).show();
+
+    let required_tabid=`#tab--projects-${pid} a`;
+
+    //CSS Change 
+    //If new project is clicked
+    if (pid==="new"){
+        $(required_tabid).css("background-image","url(../static/pfapp/img/add-blue.png)")
+    }
+    //If old project is clicked
+    else
+        $(required_tabid).css("background-color", "#9FD6FD")
+    return false;
+})
 

@@ -187,6 +187,7 @@ h4{
     line-height: normal;
 }
 
+
 .tabs a{
     color:#000;
     text-decoration: none;
@@ -220,13 +221,37 @@ h4{
     line-height: normal;
 }
 
-/*Not sure */
-.tabs a:hover{
-    background-color: #9FD6FD;
+.new{
+    background-image: url(../img/add-black.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#tab--projects-new{
+    display: flex;
+    justify-content: center;
+}
+
+
+#tab--projects-new a{
+    width: 30px;
 }
 
 
 
+
+/*Not sure */
+.tabs a:hover{
+    background-color: #6e92ff !important;
+}
+
+#tab--projects-new a:hover{
+    background-image: url(../img/add-blue.png)!important;
+    background-color: #F6F6F8!important;
+}
+
+
+/* till HERE NOT SURE */
 
 /* Create Button */
 
@@ -265,9 +290,6 @@ input{
 }
 
 
-[class^="form"]{
-    margin: 15px;
-}
 
 .formhead{
     margin-block: 20px;
@@ -348,6 +370,31 @@ input{
     background: #172960;
 }
 
+.btn--delete{
+    margin-top: 20px;
+    color: #FFF;
+    text-decoration: none;
+    font-family: Aleo;
+    font-size: 20px;
+    font-weight: 300;
+    display: flex;
+    width: 150px;
+    height: 50px;
+    padding: 10px 26px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 100px;
+    background: #dc3545;
+    border: 0;
+    margin-right: 20px;
+
+}
+
+.btn--delete:hover{
+    border: 0;
+    background: #e47a01;
+}
 .desc{
     padding: 10px;
     height:100px;

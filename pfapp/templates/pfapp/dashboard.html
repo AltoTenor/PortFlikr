@@ -14,6 +14,10 @@
     <link rel="icon" type="image/x-icon" href="{% static 'pfapp/img/logo.png' %}">
 </head>
 <body>
+    <!-- Animation Container with structure 
+            animation-container ->
+        left                    right
+    -->
     <div class="animation-container">
         <div class="left">
         </div>
@@ -21,12 +25,26 @@
         </div>
     </div>
 
-
+    <!-- 
+        Nav -> nav--logo
+     -->
     <div class="Nav">
         <img id='nav--logo' src="{% static 'pfapp/img/logo.png' %} ">PortFlikr
     </div>
 
-
+    <!-- 
+        main
+        heading                 tabs                            forms-first             forms-proj-(p.pk)       forms-proj-new       make
+            Info                    tab--profile                    formhead                formhead                formhead
+            btn--logout                 tab--header &logo           actualform              actualform              actualform
+                                        li|tab--profile--1              hidden=-1               hidden=(p.pk)          hidden=new
+                                    tab--projects                       fields                  fields                 fields
+                                        tab--header &logo               btn--submit             btn--submit            btn--submit
+                                        tab--projects--(p.pk)   
+                                            a|p.pk
+                                        tab--projects--new
+                                            a|new
+     -->
     <div class="main">
         <div class="heading">
             <div class="Info">
@@ -40,19 +58,16 @@
             <div class="tab--profile">
                 <h4 class="tab--header"><img class='tab--logo' src="{% static 'pfapp/img/usericon-gray.png' %}"> Personal </h4>
                 <ul>
-                    <li id="tab--profile--1"><a href="">Profile</a></li>
+                    <li id="tab--profile--1"><a class="-1" href="">Profile</a></li>
                 </ul>
             </div>
             <div class="tab--projects">
                 <h4 class="tab--header"><img class='tab--logo' src="{% static 'pfapp/img/project-gray.png' %}"> Projects </h4>
                 <ul>
                     {% for p in projects %}
-                        <li id="tab--projects--{{p.project_name}}"><a href="">{{p.project_name}}</a></li>
+                        <li id="tab--projects-{{p.pk}}"><a class="{{p.pk}}">{{p.project_name}}</a></li>
                     {% endfor %}
-                    <!-- <li id="tab--projects--1"><a href="">Project 1</a></li>
-                    <li id="tab--projects--2"><a href="">Project 2</a></li>
-                    <li id="tab--projects--3"><a href="">Project 3</a></li>
-                    <li id="tab--projects--4"><a href="">Project 4</a></li> -->
+                    <li id="tab--projects-new"><a class="new"></a></li>
                 </ul>
             </div>
         </div>
@@ -64,25 +79,26 @@
             <div class="formhead">Profile Settings</div>
             <form class="actualform" method = "POST" action = "">
                 {% csrf_token %}
+                <input type="hidden" name="projectID" value="-1">
                 <div class="half">
                     First Name
-                    {% render_field user_form.first_name placeholder=user.first_name class="formfields" %}
+                    {% render_field user_form.first_name placeholder=user.first_name value=user.first_name class="formfields" %}
                 </div>
                 <div class="half">
                     Last Name
-                    {% render_field user_form.last_name placeholder=user.last_name class="formfields" %}
+                    {% render_field user_form.last_name placeholder=user.last_name value=user.last_name class="formfields" %}
                 </div>
                 <div class="full">
                     Username
-                    {% render_field user_form.username placeholder=user.username class="formfields" %}
+                    {% render_field user_form.username placeholder=user.username value=user.username class="formfields" %}
                 </div>
                 <div class="full">
                     Email
-                    {% render_field user_form.email placeholder=user.email class="formfields" %}
+                    {% render_field user_form.email placeholder=user.email  value=user.email class="formfields" %}
                 </div>
                 <div class="full">
                     Occupation
-                    {% render_field personal_form.occupation placeholder=user.person.occupation class="formfields" %}
+                    {% render_field personal_form.occupation placeholder=user.person.occupation value=user.person.occupation class="formfields" %}
                 </div>
                 <div class="submit-btn-enclosure">
                     <input type="submit" class="btn--submit" value="Update" />
@@ -91,12 +107,38 @@
         </div>
 
         {% for p in projects %}
-        <div class="forms-{{p.pk}}">
-            <div class="formhead">Project Settings</div>
-            <form class="actualform" method = "POST" action = "">
+        <div class="forms-proj-{{p.pk}}" >
+            <div class="formhead">Project Settings - {{p.project_name}}</div>
+            <form class="actualform" method = "POST" action = "" novalidate>
                     {% csrf_token %}
                     <input type="hidden" name="projectID" value="{{p.pk}}">
                     <div class="full">
+                        Project Name
+                        {% render_field projects_form.project_name placeholder=p.project_name value=p.project_name class="formfields" %}
+                    </div>
+                    <div class="full">
+                        Link to Project
+                        {% render_field projects_form.url placeholder=p.url value=p.url class="formfields" %}
+                    </div>
+                    <div class="full">
+                        Description
+                        {% render_field projects_form.desc placeholder=p.desc class="formfields desc" %}
+                    </div>
+                    <div class="submit-btn-enclosure">
+                        <input type="submit" name="btn--delete" class="btn--delete" value="Delete" />
+                        <input type="submit" class="btn--submit" value="Update" />
+                    </div>
+                </form>
+            </div>
+        {%endfor%}
+        
+        <div class="forms-proj-new">
+            <div class="formhead">Project Settings</div>
+                <form class="actualform" method = "POST" action = "" novalidate>
+                    {% csrf_token %}
+                    <input type="hidden" name="projectID" value="new">
+                    <div class="full">
+                        Project Name
                         {% render_field projects_form.project_name placeholder=p.project_name class="formfields" %}
                     </div>
                     <div class="full">
@@ -108,27 +150,19 @@
                         {% render_field projects_form.desc placeholder=p.desc class="formfields desc" %}
                     </div>
                     <div class="submit-btn-enclosure">
-                        <input type="submit" class="btn--submit" value="Update" />
+                        <input type="submit" class="btn--submit" value="Add" />
                     </div>
+                    
                 </form>
             </div>
-        {%endfor%}
-        
-
 
         <div class="make">
-            <a href="#" class="btn--create">
+            <a href="{% url 'pfapp:portfolio' 1 %}" class="btn--create">
                 Create Portfolio 
             </a>
         </div>
     </div>
 
-    <div class="temp">
-
-
-
-
-    </div>
 
 
 
@@ -138,12 +172,11 @@
 
 
 
+    <!-- Loading -->
     <div id="loading">
         <img id="loading-image" src="{% static 'pfapp/img/spinner.svg'%}" alt="Loading..." />
     </div>
-    
-    <!-- Loading -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> -->
+
 </body>
     <script src="{% static 'pfapp/js/jquery-3.7.0.min.js' %}"></script>
     <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>

@@ -12,6 +12,10 @@
 {% endblock %}
 
 
-{% block content %}
-    PORTFOLIO PAGE for {{usr}}
+{% block rightside %}
+    PORTFOLIO PAGE for {{user}}
+    {{user.first_name}}
+    {{user.last_name}}
+    {{user.email}}
+    {{user.person.occupation}}
 {% endblock %}
