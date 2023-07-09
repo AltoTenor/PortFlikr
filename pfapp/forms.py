@@ -5,7 +5,7 @@ from django.contrib.auth.forms import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit,Layout
 from django.urls import reverse_lazy
-from .models import Person,Projects
+from .models import Person,Projects,Work
 
 
 
@@ -41,11 +41,11 @@ class NewUserForm(UserCreationForm):
 
 
 
-class DashboardForm(forms.Form):
-    occupation = forms.CharField(label="Occupation",max_length=30,required=False)
-    project_name = forms.CharField(label="Project name",max_length=30,required=False)
-    url = forms.URLField(label="URL for the project",required=False)
-    desc = forms.CharField(label="Description",required=False)
+# class DashboardForm(forms.Form):
+#     occupation = forms.CharField(label="Occupation",max_length=30,required=False)
+#     project_name = forms.CharField(label="Project name",max_length=30,required=False)
+#     url = forms.URLField(label="URL for the project",required=False)
+#     desc = forms.CharField(label="Description",required=False)
 
 
 class LoginForm(AuthenticationForm):
@@ -60,10 +60,15 @@ class DashboardFormUser(ModelForm):
 class DashboardFormPersonal(ModelForm):
     class Meta:
         model = Person
-        fields=['occupation']
+        fields=['occupation','skills']
 
 
 class DashboardFormProjects(ModelForm):
     class Meta:
         model = Projects
         exclude=['person']
+
+class DashboardFormWork(ModelForm):
+    class Meta:
+        model = Work
+        exclude=['start_date','end_date','person']

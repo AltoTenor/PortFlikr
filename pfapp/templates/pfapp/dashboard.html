@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Portflikr</title>
@@ -12,8 +13,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Aleo:wght@400;700&family=Alice&family=Inter:wght@300&family=Montserrat:wght@700&family=Poppins:wght@300&display=swap" rel="stylesheet"> <link rel="shortcut icon" type="image/png" href="{% static 'pfapp/img/logo.png' %}" >
     <link rel="shortcut icon" type="image/png" href="{% static 'pfapp/img/logo.png' %}" >
     <link rel="icon" type="image/x-icon" href="{% static 'pfapp/img/logo.png' %}">
+    
 </head>
 <body>
+    
     <!-- Animation Container with structure 
             animation-container ->
         left                    right
@@ -34,7 +37,7 @@
 
     <!-- 
         main
-        heading                 tabs                            forms-first             forms-proj-(p.pk)       forms-proj-new       make
+        heading                 tabs                            forms-first             forms-proj-(p.pk)       forms-proj-new   (copyforwork)    make
             Info                    tab--profile                    formhead                formhead                formhead
             btn--logout                 tab--header &logo           actualform              actualform              actualform
                                         li|tab--profile--1              hidden=-1               hidden=(p.pk)          hidden=new
@@ -70,6 +73,15 @@
                     <li id="tab--projects-new"><a class="new"></a></li>
                 </ul>
             </div>
+            <div class="tab--works">
+                <h4 class="tab--header"><img class='tab--logo' src="{% static 'pfapp/img/work.png' %}">Work Experience</h4>
+                <ul>
+                    {% for w in works %}
+                        <li id="tab--works-{{w.pk}}"><a class="{{w.pk}}">{{w.company}}</a></li>
+                    {% endfor %}
+                    <li id="tab--works-new"><a class="new"></a></li>
+                </ul>
+            </div>
         </div>
 
 
@@ -80,6 +92,7 @@
             <form class="actualform" method = "POST" action = "">
                 {% csrf_token %}
                 <input type="hidden" name="projectID" value="-1">
+                <input type="hidden" name="workID" value="-1">
                 <div class="half">
                     First Name
                     {% render_field user_form.first_name placeholder=user.first_name value=user.first_name class="formfields" %}
@@ -89,7 +102,7 @@
                     {% render_field user_form.last_name placeholder=user.last_name value=user.last_name class="formfields" %}
                 </div>
                 <div class="full">
-                    Username
+                    Username (If update fails try other usernames as it might be taken)
                     {% render_field user_form.username placeholder=user.username value=user.username class="formfields" %}
                 </div>
                 <div class="full">
@@ -99,6 +112,10 @@
                 <div class="full">
                     Occupation
                     {% render_field personal_form.occupation placeholder=user.person.occupation value=user.person.occupation class="formfields" %}
+                </div>
+                <div class="full">
+                    Skills
+                    {% render_field personal_form.skills placeholder=user.person.skills value=user.person.skills class="formfields" %}
                 </div>
                 <div class="submit-btn-enclosure">
                     <input type="submit" class="btn--submit" value="Update" />
@@ -112,13 +129,18 @@
             <form class="actualform" method = "POST" action = "" novalidate>
                     {% csrf_token %}
                     <input type="hidden" name="projectID" value="{{p.pk}}">
+                    <input type="hidden" name="workID" value="-1">
                     <div class="full">
                         Project Name
                         {% render_field projects_form.project_name placeholder=p.project_name value=p.project_name class="formfields" %}
                     </div>
                     <div class="full">
-                        Link to Project
+                        Link to Project 
+                        {% for message in messages %}
+                        - {{message}}
+                        {%endfor%}
                         {% render_field projects_form.url placeholder=p.url value=p.url class="formfields" %}
+                        
                     </div>
                     <div class="full">
                         Description
@@ -137,12 +159,16 @@
                 <form class="actualform" method = "POST" action = "" novalidate>
                     {% csrf_token %}
                     <input type="hidden" name="projectID" value="new">
+                    <input type="hidden" name="workID" value="-1">
                     <div class="full">
                         Project Name
                         {% render_field projects_form.project_name placeholder=p.project_name class="formfields" %}
                     </div>
                     <div class="full">
                         Link to Project
+                        {% for message in messages %}
+                        - {{message}}
+                        {%endfor%}
                         {% render_field projects_form.url placeholder=p.url class="formfields" %}
                     </div>
                     <div class="full">
@@ -156,13 +182,66 @@
                 </form>
             </div>
 
+        {% for w in works %}
+        <div class="forms-works-{{w.pk}}" >
+            <div class="formhead">Work Experience Settings - {{w.role}} at {{w.company}}</div>
+            <form class="actualform" method = "POST" action = "" novalidate>
+                    {% csrf_token %}
+                    <input type="hidden" name="projectID" value="-1">
+                    <input type="hidden" name="workID" value="{{w.pk}}">
+                    <div class="full">
+                        Role at Company
+                        {% render_field work_form.role placeholder=w.role value=w.role class="formfields" %}
+                    </div>
+                    <div class="full">
+                        Company Name 
+                        {% render_field work_form.company placeholder=w.company value=w.company class="formfields" %}
+                        
+                    </div>
+                    <div class="full">
+                        Description
+                        {% render_field work_form.desc placeholder=w.desc class="formfields desc" %}
+                    </div>
+                    <div class="submit-btn-enclosure">
+                        <input type="submit" name="btn--delete" class="btn--delete" value="Delete" />
+                        <input type="submit" class="btn--submit" value="Update" />
+                    </div>
+                </form>
+            </div>
+        {%endfor%}
+        
+        <div class="forms-works-new">
+            <div class="formhead">Project Settings</div>
+                <form class="actualform" method = "POST" action = "" novalidate>
+                    {% csrf_token %}
+                    <input type="hidden" name="projectID" value="-1">
+                    <input type="hidden" name="workID" value="new">
+                    <div class="full">
+                        Role at Company
+                        {% render_field work_form.role placeholder=w.role value=w.role class="formfields" %}
+                    </div>
+                    <div class="full">
+                        Company Name 
+                        {% render_field work_form.company placeholder=w.company value=w.company class="formfields" %}
+                        
+                    </div>
+                    <div class="full">
+                        Description
+                        {% render_field work_form.desc placeholder=w.desc class="formfields desc" %}
+                    </div>
+                    <div class="submit-btn-enclosure">
+                        <input type="submit" class="btn--submit" value="Update" />
+                    </div>
+                </form>
+            </div>
+
+        
         <div class="make">
             <a href="{% url 'pfapp:portfolio' 1 %}" class="btn--create">
                 Create Portfolio 
             </a>
         </div>
     </div>
-
 
 
 

@@ -87,8 +87,9 @@ function hideall(){
     $('[class^="forms-"]').hide();
     //Setting BG color of add to black
     $("#tab--projects-new a").css("background-image","url(../static/pfapp/img/add-black.png)")
+    $("#tab--works-new a").css("background-image","url(../static/pfapp/img/add-black.png)")
     //Setting BG color of all other tab links to white
-    $('.tabs a').css("background-color", "#F6F6F8");
+    $('.tabs a').css("background-color", "#fcfcf2");
 }
 
 
@@ -124,6 +125,28 @@ $('[class^="tab--projects"] a').click((e)=>{
         $(required_tabid).css("background-image","url(../static/pfapp/img/add-blue.png)")
     }
     //If old project is clicked
+    else
+        $(required_tabid).css("background-color", "#9FD6FD")
+    return false;
+})
+
+//CASE: Works is clicked
+$('[class^="tab--works"] a').click((e)=>{
+    let wid=e.target.className;
+    hideall();
+    let required_formclass=`.forms-works-${wid}`
+    console.log(required_formclass+" clicked");
+    //Showing Required form
+    $(required_formclass).show();
+
+    let required_tabid=`#tab--works-${wid} a`;
+
+    //CSS Change 
+    //If new work is clicked
+    if (wid==="new"){
+        $(required_tabid).css("background-image","url(../static/pfapp/img/add-blue.png)")
+    }
+    //If old work is clicked
     else
         $(required_tabid).css("background-color", "#9FD6FD")
     return false;
