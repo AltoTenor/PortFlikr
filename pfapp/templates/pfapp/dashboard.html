@@ -237,9 +237,20 @@
 
         
         <div class="make">
-            <a href="{% url 'pfapp:portfolio' 1 %}" class="btn--create">
-                Create Portfolio 
-            </a>
+            <form action="" method="post">
+                {% csrf_token %}
+                <p>Portfolio Style:</p>
+                <div class="box">
+                    <select name="portfolio-style" id="porfolio-style">
+                        <option value="1" style="color:black">Basic</option>
+                        <option value="X" style="color:gray">More Coming Soon</option>
+                    </select>
+                </div>
+                <input type="submit" name="btn--create" class="btn--create" value="Create Portfolio" />
+                <!-- <a href="{% url 'pfapp:portfolio' 1 %}" class="btn--create">
+                    Create Portfolio 
+                </a> -->
+            </form>
         </div>
     </div>
 

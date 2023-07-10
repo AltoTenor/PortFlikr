@@ -66,6 +66,9 @@ class Dashboard(LoginRequiredMixin,View):
         return render(request,'pfapp/dashboard.html',ctx)
     
     def post(self,request):
+        if (request.POST.get('portfolio-style')!=None):
+            return redirect("pfapp:portfolio",request.POST.get('portfolio-style'))
+
         pid=request.POST.get('projectID')
         workid=request.POST.get('workID')
         if (request.POST.get('btn--delete') and pid!="-1"):
@@ -152,8 +155,13 @@ def logout_view(request):
 
 # PORTFOLIO VIEW
 class Portfolio(View):                                 
-    def get(self, request , username) :
-        return render(request,'pfapp/portfolio.html',{'user':request.user})
+    def get(self, request,num) :
+        print("here",num)
+        if (num=='1'):
+            return render(request,'pfapp/portfolio1.html',{'user':request.user})
+        elif (num=='X'):
+            return redirect("pfapp:dashboard")
+        # return render(request,'pfapp/portfolio1.html',{'user':request.user})
 
 
 
