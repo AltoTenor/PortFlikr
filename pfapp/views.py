@@ -168,6 +168,7 @@ class Portfolio(View):
 class PortfolioAPI(APIView):
     # serializer_class = ReactSerializer
     def get(self, request, num):
+        output=Person.objects.get(user=request.user.pk)
         output = [{
                     "style":num,
                     "first_name":output.user.first_name,
@@ -193,7 +194,7 @@ class PortfolioAPI(APIView):
                             for x in output.work_set.all()
                     ]
                 }
-                  for output in Person.objects.all()]
+            ]
         return Response(output)
 
     # def post(self, request):
