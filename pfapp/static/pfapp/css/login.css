@@ -72,7 +72,7 @@ uneditable-input:required:focus{
 	font-size:17px;
 	padding:16px 76px;
 	text-decoration:none;
-    margin: 5% 0% 0% 0%;
+    margin: 5% 0% 10% 0%;
 }
 .loginbtn:hover {
 	background-color:#212e58;
@@ -88,7 +88,7 @@ uneditable-input:required:focus{
 
 .remandforgot{
     margin-top: 1%;
-    font-size: 1.5cqmin;
+    font-size: 1.5vh;
     font-family: 'Montserrat', sans-serif;
     text-decoration: none;
     color: #0e162e;
@@ -101,5 +101,11 @@ uneditable-input:required:focus{
 #img2id{
     width: 80vmin;
     height: auto;
+}
+
+@media(max-width:768px) {
+    .loginbtn{
+        margin-bottom: 10%;
+    }
 }
 /* in main */
