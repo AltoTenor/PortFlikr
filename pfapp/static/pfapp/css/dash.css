@@ -80,6 +80,7 @@ html,body{
 @media (max-width:786px){
     .main{
         grid-template-columns: 1fr;
+        margin: 9px 10px 0 10px;
     }
     .heading{
         grid-column: 1/2;
