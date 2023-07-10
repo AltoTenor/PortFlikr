@@ -33,23 +33,23 @@ Register
         {% csrf_token %}
         <div class="username1_class container-fluid">
             <div class="Name row">
-                <div class="col-3">
+                <div class="col-md-3 col-2">
                 </div>
-                <div class="col-md-3  col-6">
+                <div class="col-md-3  col-8">
                     <div class="form-floating mb-3">
                         {{ register_form.first_name | add_class:'form-control'|attr:"placeholder:User"}}
                         <label for="id_username">&nbsp;<img style="height:1.8cqh;" src="{% static 'pfapp/img/usericon.png' %}" >&nbsp; First Name</label>
                     </div>
                 </div>
 
-                <div class="d-md-none col-3 ">
+                <div class="d-md-none col-2 ">
                     <!-- empty -->
                 </div>
-                <div class="d-md-none  col-3">
+                <div class="d-md-none  col-2">
                     <!-- empty -->
                 </div>
 
-                <div class="ps-md-0 col-md-3  col-6 ">
+                <div class="ps-md-0 col-md-3  col-8 ">
                     <div class="form-floating mb-3">
                         {{ register_form.last_name | add_class:'form-control'|attr:"placeholder:User"}}
                         <label for="id_username">&nbsp;<img style="height:1.8cqh;" src="{% static 'pfapp/img/usericon.png' %}" >&nbsp; Last Name</label>
@@ -61,10 +61,10 @@ Register
 
         <div class="username_class container-fluid">
             <div class="row">
-                <div class="col-3">
+                <div class="col-md-3 col-2">
                     <!-- empty -->
                 </div>
-                <div class="col-6">
+                <div class="col-md-6  col-8">
                     <div class="form-floating mb-3">
                         {{ register_form.username | add_class:'form-control'|attr:"placeholder:User"|remove_attr:"autofocus" }}
                         <label for="id_username">&nbsp;<img style="height:1.8cqh;" src="{% static 'pfapp/img/usericon.png' %}" >&nbsp;Username</label>
@@ -75,10 +75,10 @@ Register
 
         <div class="username_class container-fluid">
             <div class="row">
-                <div class="col-3">
+                <div class="col-md-3 col-2">
                     <!-- empty -->
                 </div>
-                <div class="col-6">
+                <div class="col-md-6  col-8">
                     <div class="form-floating mb-3">
                         {{ register_form.email | add_class:'form-control'|attr:"placeholder:User"}}
                         <label for="id_username">&nbsp;<img style="height:1.8cqh;" src="{% static 'pfapp/img/usericon.png' %}" >&nbsp;Email</label>
@@ -89,10 +89,10 @@ Register
 
         <div class="password_class container-fluid">
             <div class="row">
-                <div class="col-3">
+                <div class="col-md-3 col-2">
                     <!-- empty -->
                 </div>
-                <div class="col-6">
+                <div class="col-md-6  col-8">
                     <div class="form-floating mb-3">
                         {{ register_form.password1 | add_class:'form-control'|attr:"placeholder:Pass"}}
                         <label class="floatlabel" for="id_password">&nbsp;<img style="height:2cqh; padding-bottom:3%" src="{% static 'pfapp/img/pswdicon.png' %}" >&nbsp;Password</label>
@@ -103,10 +103,10 @@ Register
 
         <div class="password_class container-fluid">
             <div class="row">
-                <div class="col-3">
+                <div class="col-md-3 col-2">
                     <!-- empty -->
                 </div>
-                <div class="col-6">
+                <div class="col-md-6  col-8">
                     <div class="form-floating mb-3">
                         {{ register_form.password2 | add_class:'form-control'|attr:"placeholder:Pass"}}
                         <label class="floatlabel" for="id_password">&nbsp;<img style="height:2cqh; padding-bottom:3%" src="{% static 'pfapp/img/pswdicon.png' %}" >&nbsp;Re-Enter Password</label>

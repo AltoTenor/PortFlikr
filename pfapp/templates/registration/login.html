@@ -61,9 +61,9 @@ Login
             {% csrf_token %}
             <div class="username_class container-fluid">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-md-3 col-2">
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6 col-8">
                         <div class="form-floating mb-3">
                             {{ form.username |remove_attr:"autocomplete"|remove_attr:"autofocus" | add_class:'form-control'|attr:"placeholder:User"|attr:"autocomplete:off"}}
                             <label for="id_username">&nbsp;<img style="height:1.8cqh;" src="{% static 'pfapp/img/usericon.png' %}" >&nbsp; Username</label>
@@ -74,9 +74,9 @@ Login
             
             <div class="password_class container-fluid">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-md-3 col-2">
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6 col-8">
                         <div class="form-floating mb-3">
                             {{ form.password | add_class:'form-control'|attr:"placeholder:Pass"}}
                             <label class="floatlabel" for="id_password">&nbsp;<img style="height:2cqh; padding-bottom:3%" src="{% static 'pfapp/img/pswdicon.png' %}" >&nbsp;Password</label>
@@ -97,7 +97,7 @@ Login
                             </label>
                         </div>
                     </div>
-                    <div class="col-3" style="margin-left: 3%;margin-top:0.4cqmin">
+                    <div class="col-3" >
                         <a href="#" style="text-decoration: none; color:#0e162e;  ">Forgot Password?</a>
                     </div>
                 </div>

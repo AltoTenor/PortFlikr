@@ -71,6 +71,12 @@ input[type=email]{
 	text-decoration:none;
     margin: 1% 0% 0% 0%;
 }
+
+@media(max-width:768px) {
+    .regbtn{
+        margin-bottom: 10%;
+    }
+}
 .regbtn:hover {
 	background-color:#212e58;
 }
@@ -97,3 +103,8 @@ input[type=email]{
     margin-right: 2vmin;
 }
 
+/* @media (max-width:768px){
+    .col-3{
+        display: none;
+    }
+} */
