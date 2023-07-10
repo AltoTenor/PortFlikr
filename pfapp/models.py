@@ -13,7 +13,12 @@ class Projects(models.Model):
     project_name = models.CharField(max_length=30)
     url = models.URLField(blank=True)
     desc = models.TextField(blank=True)
-    person = models.ForeignKey('Person',on_delete=models.CASCADE) 
+    person = models.ForeignKey('Person',related_name='projects_set', on_delete=models.CASCADE) 
+
+    # class Meta:
+    #     unique_together = ['project_name','url','desc']
+    #     ordering = ['project_name']
+
     def __str__(self):
         return self.project_name
     
@@ -23,6 +28,6 @@ class Work(models.Model):
     desc = models.TextField(blank=True)
     start_date=models.DateField(blank=True,null=True)
     end_date=models.DateField(blank=True,null=True)
-    person = models.ForeignKey('Person',on_delete=models.CASCADE) 
+    person = models.ForeignKey('Person',related_name='work_set', on_delete=models.CASCADE) 
     def __str__(self):
         return (self.role+" : "+self.company)

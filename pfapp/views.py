@@ -9,6 +9,9 @@ from .models import Person,Projects
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
+from rest_framework.views import APIView
+from rest_framework.response import Response
+# from . serializer import *
 
 # Get Started Page.
 class Get_started(View):                                 
@@ -66,9 +69,11 @@ class Dashboard(LoginRequiredMixin,View):
         return render(request,'pfapp/dashboard.html',ctx)
     
     def post(self,request):
+        #Portfolio Call
         if (request.POST.get('portfolio-style')!=None):
             return redirect("pfapp:portfolio",request.POST.get('portfolio-style'))
 
+        #Deleting a work exp or project
         pid=request.POST.get('projectID')
         workid=request.POST.get('workID')
         if (request.POST.get('btn--delete') and pid!="-1"):
@@ -143,9 +148,6 @@ class Dashboard(LoginRequiredMixin,View):
         return redirect(request.path)
 
 
-    
-
-
 #LOGOUT PAGE 
 def logout_view(request):
     logout(request)
@@ -155,7 +157,7 @@ def logout_view(request):
 
 # PORTFOLIO VIEW
 class Portfolio(View):                                 
-    def get(self, request,num) :
+    def get(self, request, num) :
         print("here",num)
         if (num=='1'):
             return render(request,'pfapp/portfolio1.html',{'user':request.user})
@@ -163,7 +165,43 @@ class Portfolio(View):
             return redirect("pfapp:dashboard")
         # return render(request,'pfapp/portfolio1.html',{'user':request.user})
 
+class PortfolioAPI(APIView):
+    # serializer_class = ReactSerializer
+    def get(self, request, num):
+        output = [{
+                    "style":num,
+                    "first_name":output.user.first_name,
+                    "last_name":output.user.last_name,
+                    "username":output.user.username,
+                    "email":output.user.email,
+                    "skills": output.skills, 
+                    "occupation": output.occupation,
+                    "projects":[
+                        {
+                            "name":x.project_name,
+                            "url":x.url,
+                            "desc":x.desc
+                        }
+                            for x in output.projects_set.all()
+                    ],
+                    "work_exp":[
+                        {
+                            "role":x.role,
+                            "company":x.company,
+                            "desc":x.desc
+                        }
+                            for x in output.work_set.all()
+                    ]
+                }
+                  for output in Person.objects.all()]
+        return Response(output)
 
+    # def post(self, request):
+
+    #     serializer = ReactSerializer(data=request.data)
+    #     if serializer.is_valid(raise_exception=True):
+    #         serializer.save()
+    #         return Response(serializer.data)
 
 
 # LOGIN VIEW
