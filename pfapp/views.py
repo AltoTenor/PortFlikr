@@ -71,7 +71,7 @@ class Dashboard(LoginRequiredMixin,View):
     def post(self,request):
         #Portfolio Call
         if (request.POST.get('portfolio-style')!=None):
-            return redirect("pfapp:portfolio",request.POST.get('portfolio-style'))
+            return redirect("pfapp:portfolio",request.POST.get('portfolio-style'),request.user.person.pk)
 
         #Deleting a work exp or project
         pid=request.POST.get('projectID')
@@ -167,8 +167,8 @@ class Portfolio(View):
 
 class PortfolioAPI(APIView):
     # serializer_class = ReactSerializer
-    def get(self, request, num):
-        output=Person.objects.get(user=request.user.pk)
+    def get(self, request, num, userid):
+        output=Person.objects.get(pk=userid)
         output = [{
                     "style":num,
                     "first_name":output.user.first_name,
