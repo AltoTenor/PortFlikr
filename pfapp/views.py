@@ -49,7 +49,7 @@ class Register(View):
         request.session['note'] = 1
         return redirect(request.path)
     
-
+output=[]
 # DASHBOARD VIEW
 class Dashboard(LoginRequiredMixin,View):                                 
     def get(self, request) :
@@ -70,8 +70,10 @@ class Dashboard(LoginRequiredMixin,View):
     
     def post(self,request):
         #Portfolio Call
+        global output
+        output=Person.objects.get(pk=request.user.pk)
         if (request.POST.get('portfolio-style')!=None):
-            return redirect("pfapp:portfolio",request.POST.get('portfolio-style'),request.user.person.pk)
+            return redirect("pfapp:portfolio",request.POST.get('portfolio-style'))
 
         #Deleting a work exp or project
         pid=request.POST.get('projectID')
@@ -167,9 +169,9 @@ class Portfolio(View):
 
 class PortfolioAPI(APIView):
     # serializer_class = ReactSerializer
-    def get(self, request, num, userid):
-        output=Person.objects.get(pk=userid)
-        output = [{
+    def get(self, request, num):
+        global output
+        output_list = [{
                     "style":num,
                     "first_name":output.user.first_name,
                     "last_name":output.user.last_name,
@@ -195,7 +197,7 @@ class PortfolioAPI(APIView):
                     ]
                 }
             ]
-        return Response(output)
+        return Response(output_list)
 
     # def post(self, request):
 
