@@ -14,11 +14,6 @@ class Projects(models.Model):
     url = models.URLField(blank=True)
     desc = models.TextField(blank=True)
     person = models.ForeignKey('Person',related_name='projects_set', on_delete=models.CASCADE) 
-
-    # class Meta:
-    #     unique_together = ['project_name','url','desc']
-    #     ordering = ['project_name']
-
     def __str__(self):
         return self.project_name
     
