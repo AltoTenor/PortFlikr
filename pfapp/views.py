@@ -11,6 +11,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.http import HttpResponseNotFound
 # from . serializer import *
 
 # Get Started Page.
@@ -49,7 +50,6 @@ class Register(View):
         request.session['note'] = 1
         return redirect(request.path)
     
-output=[]
 # DASHBOARD VIEW
 class Dashboard(LoginRequiredMixin,View):                                 
     def get(self, request) :
@@ -70,10 +70,10 @@ class Dashboard(LoginRequiredMixin,View):
     
     def post(self,request):
         #Portfolio Call
-        global output
-        output=Person.objects.get(pk=request.user.pk)
         if (request.POST.get('portfolio-style')!=None):
-            return redirect("pfapp:portfolio",request.POST.get('portfolio-style'))
+            return HttpResponseNotFound("Still in development coming soon")
+            # return redirect("http://localhost:3000")
+            # return redirect("http://localhost:3000/"+str(request.POST.get('portfolio-style'))+"/"+str(request.user.pk))
 
         #Deleting a work exp or project
         pid=request.POST.get('projectID')
@@ -169,10 +169,8 @@ class Portfolio(View):
 
 class PortfolioAPI(APIView):
     # serializer_class = ReactSerializer
-    def get(self, request, num):
-        global output
+    def get(self, request):
         output_list = [{
-                    "style":num,
                     "first_name":output.user.first_name,
                     "last_name":output.user.last_name,
                     "username":output.user.username,
@@ -196,7 +194,7 @@ class PortfolioAPI(APIView):
                             for x in output.work_set.all()
                     ]
                 }
-            ]
+            for output in Person.objects.all()]
         return Response(output_list)
 
     # def post(self, request):
