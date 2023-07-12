@@ -71,51 +71,61 @@ class Dashboard(LoginRequiredMixin,View):
     def post(self,request):
         #Portfolio Call
         if (request.POST.get('portfolio-style')!=None):
-            return HttpResponseNotFound("Still in development coming soon")
-            # return redirect("http://localhost:3000")
+            # return HttpResponseNotFound("Still in development coming soon")
+            return redirect("http://localhost:3000")
             # return redirect("http://localhost:3000/"+str(request.POST.get('portfolio-style'))+"/"+str(request.user.pk))
 
-        #Deleting a work exp or project
-        pid=request.POST.get('projectID')
-        workid=request.POST.get('workID')
-        if (request.POST.get('btn--delete') and pid!="-1"):
-            request.user.person.projects_set.get(pk=pid).delete()
-            return redirect(request.path)
-        elif (request.POST.get('btn--delete') and workid!="-1"):
-            request.user.person.work_set.get(pk=workid).delete()
-            return redirect(request.path)
+ 
+
+class Profile(View):
+    def post(self,request):
         #Forms and cleaning
         form1=DashboardFormUser(request.POST)
         form2=DashboardFormPersonal(request.POST)
-        form3=DashboardFormProjects(request.POST)
-        form4=DashboardFormWork(request.POST)
         form1.is_valid()
         form2.is_valid()
-        form3.is_valid()
-        form4.is_valid()
         cleaned1=form1.cleaned_data
         cleaned2=form2.cleaned_data
+
+        # print("In Profile View ")
+        # print(cleaned1)
+        # print(cleaned2)
+
+        # Handling Data
+        request.user.first_name=cleaned1['first_name']
+        request.user.last_name=cleaned1['last_name']
+        request.user.email=cleaned1['email']
+        if 'username' in cleaned1:
+            request.user.username=cleaned1['username']
+        request.user.person.occupation=cleaned2['occupation']
+        request.user.person.skills=cleaned2['skills']
+        request.user.person.save()
+        request.user.save()
+
+        return redirect(reverse_lazy("pfapp:dashboard"))   
+
+
+
+class Project(View):
+    def post(self,request):
+        pid=request.POST.get('projectID')
+
+        #Deleting The project
+        if (request.POST.get('btn--delete') and pid!="-1"):
+            request.user.person.projects_set.get(pk=pid).delete()
+            return redirect(reverse_lazy("pfapp:dashboard"))
+
+        #Handling Data
+        form3=DashboardFormProjects(request.POST)
+        form3.is_valid()
         cleaned3=form3.cleaned_data
-        cleaned4=form4.cleaned_data
+        # print("In project view")
+        # print(cleaned3)
 
-        #Handling Persons
-        if (pid=="-1" and workid=="-1"):
-            print(cleaned1)
-            request.user.first_name=cleaned1['first_name']
-            request.user.last_name=cleaned1['last_name']
-            request.user.email=cleaned1['email']
-            if 'username' in cleaned1:
-                request.user.username=cleaned1['username']
-            request.user.person.occupation=cleaned2['occupation']
-            request.user.person.skills=cleaned2['skills']
-            request.user.person.save()
-            request.user.save()
-
-        #Handling New Projects
-        elif (pid!="new" and workid=="-1"):
-            print(cleaned3)
+        #Old project
+        if (pid!="new"):
             projid=request.user.person.projects_set.get(pk=pid)
-            print(projid)
+            # print(projid)
             projid.project_name=cleaned3['project_name']
             if ('url' in cleaned3):
                 projid.url=cleaned3['url']
@@ -124,30 +134,47 @@ class Dashboard(LoginRequiredMixin,View):
             if (cleaned3['desc']!=''): 
                 projid.desc=cleaned3['desc']
             projid.save()
+        #New Project
+        else:
+            if ('url' not in cleaned3):
+                messages.error(request, "Invalid URL entered before")
+            else:
+                request.user.person.projects_set.create(project_name=cleaned3['project_name'],url=cleaned3['url'],desc=cleaned3['desc'])    
+        return redirect(reverse_lazy("pfapp:dashboard"))
 
-        #Handling New Work
-        elif (pid=="-1" and workid!="new"):
+
+class Work(View):
+    def post(self,request):
+        workid=request.POST.get('workID')
+
+        #Deletion
+        if (request.POST.get('btn--delete') and workid!="-1"):
+            request.user.person.work_set.get(pk=workid).delete()
+            return redirect(reverse_lazy("pfapp:dashboard"))
+        
+
+        #Handling Data
+        form4=DashboardFormWork(request.POST)
+        form4.is_valid()
+        cleaned4=form4.cleaned_data
+
+        #New work
+        if (workid=="new"):
             print(cleaned4)
+            request.user.person.work_set.create(role=cleaned4['role'],company=cleaned4['company'],desc=cleaned4['desc'])
+        #Old Work
+        else:
+            # print(cleaned4)
             wid=request.user.person.work_set.get(pk=workid)
-            print(wid)
+            # print(wid)
             wid.role=cleaned4['role']
             wid.company=cleaned4['company']
             if (cleaned4['desc']!=''): 
                 wid.desc=cleaned4['desc']
             wid.save()
 
-        #Handling Old Projects
-        elif(pid!="-1"):
-            print(cleaned3)
-            if ('url' not in cleaned3):
-                messages.error(request, "Invalid URL entered before")
-            else:
-                request.user.person.projects_set.create(project_name=cleaned3['project_name'],url=cleaned3['url'],desc=cleaned3['desc'])
-        #Handling Old Work
-        else:
-            print(cleaned4)
-            request.user.person.work_set.create(role=cleaned4['role'],company=cleaned4['company'],desc=cleaned4['desc'])
-        return redirect(request.path)
+        return redirect(reverse_lazy("pfapp:dashboard"))
+
 
 
 #LOGOUT PAGE 
@@ -218,3 +245,83 @@ class UpdatedLoginView(LoginView):
         else:   
             self.request.session.set_expiry(1209600)
         return super(UpdatedLoginView, self).form_valid(form)
+    
+
+
+
+#DEPRECIATED
+
+       #Deleting a work exp or project
+        # pid=request.POST.get('projectID')
+        # workid=request.POST.get('workID')
+        # if (request.POST.get('btn--delete') and pid!="-1"):
+        #     request.user.person.projects_set.get(pk=pid).delete()
+        #     return redirect(request.path)
+        # elif (request.POST.get('btn--delete') and workid!="-1"):
+        #     request.user.person.work_set.get(pk=workid).delete()
+        #     return redirect(request.path)
+        #Forms and cleaning
+        # form1=DashboardFormUser(request.POST)
+        # form2=DashboardFormPersonal(request.POST)
+        # form3=DashboardFormProjects(request.POST)
+        # form4=DashboardFormWork(request.POST)
+        # form1.is_valid()
+        # form2.is_valid()
+        # form3.is_valid()
+        # form4.is_valid()
+        # cleaned1=form1.cleaned_data
+        # cleaned2=form2.cleaned_data
+        # cleaned3=form3.cleaned_data
+        # cleaned4=form4.cleaned_data
+
+        #Handling Persons
+        # if (pid=="-1" and workid=="-1"):
+        #     print(cleaned1)
+        #     request.user.first_name=cleaned1['first_name']
+        #     request.user.last_name=cleaned1['last_name']
+        #     request.user.email=cleaned1['email']
+        #     if 'username' in cleaned1:
+        #         request.user.username=cleaned1['username']
+        #     request.user.person.occupation=cleaned2['occupation']
+        #     request.user.person.skills=cleaned2['skills']
+        #     request.user.person.save()
+        #     request.user.save()
+
+        #Handling New Projects
+        # if (pid!="new" and workid=="-1"):
+        #     print(cleaned3)
+        #     projid=request.user.person.projects_set.get(pk=pid)
+        #     print(projid)
+        #     projid.project_name=cleaned3['project_name']
+        #     if ('url' in cleaned3):
+        #         projid.url=cleaned3['url']
+        #     else:
+        #         messages.error(request, "Invalid URL entered before")
+        #     if (cleaned3['desc']!=''): 
+        #         projid.desc=cleaned3['desc']
+        #     projid.save()
+
+        #Handling New Work
+        # elif (pid=="-1" and workid!="new"):
+        #     print(cleaned4)
+        #     wid=request.user.person.work_set.get(pk=workid)
+        #     print(wid)
+        #     wid.role=cleaned4['role']
+        #     wid.company=cleaned4['company']
+        #     if (cleaned4['desc']!=''): 
+        #         wid.desc=cleaned4['desc']
+        #     wid.save()
+
+        # #Handling Old Projects
+        # elif(pid!="-1"):
+        #     print(cleaned3)
+        #     if ('url' not in cleaned3):
+        #         messages.error(request, "Invalid URL entered before")
+        #     else:
+        #         request.user.person.projects_set.create(project_name=cleaned3['project_name'],url=cleaned3['url'],desc=cleaned3['desc'])
+        #Handling Old Work
+        # else:
+        #     print(cleaned4)
+        #     request.user.person.work_set.create(role=cleaned4['role'],company=cleaned4['company'],desc=cleaned4['desc'])
+        # return redirect(request.path)
+

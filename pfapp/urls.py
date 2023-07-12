@@ -10,6 +10,9 @@ urlpatterns = [
     path("register/",views.Register.as_view(),name="register"),
     path("accounts/login/", views.UpdatedLoginView.as_view(extra_context={"leftclass":"d-none d-md-block"})),
     path("dashboard/",views.Dashboard.as_view(),name="dashboard"),
+    path("submit_profile/",views.Profile.as_view(),name="submit_profile"),
+    path("submit_project/",views.Project.as_view(),name="submit_project"),
+    path("submit_work/",views.Work.as_view(),name="submit_work"),
     path("portfolio_api/",views.PortfolioAPI.as_view(),name="portfolio"),
     path("logout/",views.logout_view,name="logout"),
 

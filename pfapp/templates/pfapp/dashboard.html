@@ -89,10 +89,10 @@
 
         <div class="forms-first">
             <div class="formhead">Profile Settings</div>
-            <form class="actualform" method = "POST" action = "">
+            <form class="actualform" method = "POST" action = "{% url 'pfapp:submit_profile'%}">
                 {% csrf_token %}
-                <input type="hidden" name="projectID" value="-1">
-                <input type="hidden" name="workID" value="-1">
+                <!-- <input type="hidden" name="projectID" value="-1">
+                <input type="hidden" name="workID" value="-1"> -->
                 <div class="half">
                     First Name
                     {% render_field user_form.first_name placeholder=user.first_name value=user.first_name class="formfields" %}
@@ -126,10 +126,10 @@
         {% for p in projects %}
         <div class="forms-proj-{{p.pk}}" >
             <div class="formhead">Project Settings - {{p.project_name}}</div>
-            <form class="actualform" method = "POST" action = "" novalidate>
+            <form class="actualform" method = "POST" action = "{% url 'pfapp:submit_project'%}" novalidate>
                     {% csrf_token %}
                     <input type="hidden" name="projectID" value="{{p.pk}}">
-                    <input type="hidden" name="workID" value="-1">
+                    <!-- <input type="hidden" name="workID" value="-1"> -->
                     <div class="full">
                         Project Name
                         {% render_field projects_form.project_name placeholder=p.project_name value=p.project_name class="formfields" %}
@@ -156,10 +156,10 @@
         
         <div class="forms-proj-new">
             <div class="formhead">Project Settings</div>
-                <form class="actualform" method = "POST" action = "" novalidate>
+                <form class="actualform" method = "POST" action = "{% url 'pfapp:submit_project'%}" novalidate>
                     {% csrf_token %}
                     <input type="hidden" name="projectID" value="new">
-                    <input type="hidden" name="workID" value="-1">
+                    <!-- <input type="hidden" name="workID" value="-1"> -->
                     <div class="full">
                         Project Name
                         {% render_field projects_form.project_name placeholder=p.project_name class="formfields" %}
@@ -185,9 +185,9 @@
         {% for w in works %}
         <div class="forms-works-{{w.pk}}" >
             <div class="formhead">Work Experience Settings - {{w.role}} at {{w.company}}</div>
-            <form class="actualform" method = "POST" action = "" novalidate>
+            <form class="actualform" method = "POST" action = "{% url 'pfapp:submit_work'%}" novalidate>
                     {% csrf_token %}
-                    <input type="hidden" name="projectID" value="-1">
+                    <!-- <input type="hidden" name="projectID" value="-1"> -->
                     <input type="hidden" name="workID" value="{{w.pk}}">
                     <div class="full">
                         Role at Company
@@ -212,9 +212,9 @@
         
         <div class="forms-works-new">
             <div class="formhead">Project Settings</div>
-                <form class="actualform" method = "POST" action = "" novalidate>
+                <form class="actualform" method = "POST" action = "{% url 'pfapp:submit_work'%}" novalidate>
                     {% csrf_token %}
-                    <input type="hidden" name="projectID" value="-1">
+                    <!-- <input type="hidden" name="projectID" value="-1"> -->
                     <input type="hidden" name="workID" value="new">
                     <div class="full">
                         Role at Company
