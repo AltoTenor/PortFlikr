@@ -73,7 +73,7 @@ class Dashboard(LoginRequiredMixin,View):
         if (request.POST.get('portfolio-style')!=None):
             # return HttpResponseNotFound("Still in development coming soon")
             # return redirect("http://localhost:3000")
-            return redirect("http://localhost:3000/"+str(request.POST.get('portfolio-style'))+"/"+str(request.user.pk-1))
+            return redirect("https://portflikr.web.app/"+str(request.POST.get('portfolio-style'))+"/"+str(request.user.pk-1))
 
  
 
