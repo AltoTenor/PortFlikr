@@ -89,7 +89,7 @@
 
         <div class="forms-first">
             <div class="formhead">Profile Settings</div>
-            <form class="actualform" method = "POST" action = "{% url 'pfapp:submit_profile'%}">
+            <form class="actualform" method = "POST" action = "{% url 'pfapp:submit_profile'%}" novalidate>
                 {% csrf_token %}
                 <!-- <input type="hidden" name="projectID" value="-1">
                 <input type="hidden" name="workID" value="-1"> -->
@@ -114,8 +114,24 @@
                     {% render_field personal_form.occupation placeholder=user.person.occupation value=user.person.occupation class="formfields" %}
                 </div>
                 <div class="full">
+                    Github URL
+                    {% render_field personal_form.github placeholder=user.person.github value=user.person.github class="formfields" %}
+                </div>
+                <div class="full">
+                    Linkedin URL
+                    {% render_field personal_form.linkedin placeholder=user.person.linkedin value=user.person.linkedin class="formfields" %}
+                </div>
+                <div class="full">
                     Skills
                     {% render_field personal_form.skills placeholder=user.person.skills value=user.person.skills class="formfields" %}
+                </div>
+                <div class="full">
+                    Hobbies
+                    {% render_field personal_form.hobbies placeholder=user.person.hobbies value=user.person.hobbies class="formfields" %}
+                </div>
+                <div class="full">
+                    About Me (Around 30 characters or so)
+                    {% render_field personal_form.desc placeholder=user.person.desc value=user.person.desc class="formfields desc" %}
                 </div>
                 <div class="submit-btn-enclosure">
                     <input type="submit" class="btn--submit" value="Update" />
@@ -269,3 +285,4 @@
     <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script src="{% static 'pfapp/js/dashboard.js' %}"></script>
 </html>
+

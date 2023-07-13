@@ -3,8 +3,12 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Person(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE) 
+    linkedin = models.URLField(blank=True)
+    github = models.URLField(blank=True)
     occupation = models.CharField(max_length=30,blank=True)
     skills = models.CharField(max_length=255,blank=True)
+    hobbies = models.CharField(max_length=255,blank=True)
+    desc = models.TextField(blank=True)
     def __str__(self):
         return self.user.first_name
     
