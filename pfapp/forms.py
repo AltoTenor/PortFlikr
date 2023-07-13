@@ -60,7 +60,7 @@ class DashboardFormUser(ModelForm):
 class DashboardFormPersonal(ModelForm):
     class Meta:
         model = Person
-        fields=['occupation','skills']
+        fields=['desc','hobbies','github','linkedin','occupation','skills']
 
 
 class DashboardFormProjects(ModelForm):

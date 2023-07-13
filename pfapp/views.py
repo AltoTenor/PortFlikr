@@ -72,8 +72,8 @@ class Dashboard(LoginRequiredMixin,View):
         #Portfolio Call
         if (request.POST.get('portfolio-style')!=None):
             # return HttpResponseNotFound("Still in development coming soon")
-            return redirect("http://localhost:3000")
-            # return redirect("http://localhost:3000/"+str(request.POST.get('portfolio-style'))+"/"+str(request.user.pk))
+            # return redirect("http://localhost:3000")
+            return redirect("http://localhost:3000/"+str(request.POST.get('portfolio-style'))+"/"+str(request.user.pk-1))
 
  
 
@@ -99,6 +99,17 @@ class Profile(View):
             request.user.username=cleaned1['username']
         request.user.person.occupation=cleaned2['occupation']
         request.user.person.skills=cleaned2['skills']
+        request.user.person.hobbies=cleaned2['hobbies']
+        if (cleaned2['desc']!=''): 
+                request.user.person.desc=cleaned2['desc']
+        if ('linkedin' in cleaned2):
+            request.user.person.linkedin=cleaned2['linkedin']
+        else:
+            messages.error(request, "Invalid URL entered before")
+        if ('github' in cleaned2):
+            request.user.person.github=cleaned2['github']
+        else:
+            messages.error(request, "Invalid URL entered before")
         request.user.person.save()
         request.user.save()
 
@@ -203,7 +214,11 @@ class PortfolioAPI(APIView):
                     "username":output.user.username,
                     "email":output.user.email,
                     "skills": output.skills, 
+                    "hobbies": output.hobbies, 
                     "occupation": output.occupation,
+                    "github":output.github,
+                    "linkedin":output.linkedin,
+                    "aboutme":output.desc,
                     "projects":[
                         {
                             "name":x.project_name,
