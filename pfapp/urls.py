@@ -14,6 +14,7 @@ urlpatterns = [
     path("submit_project/",views.Project.as_view(),name="submit_project"),
     path("submit_work/",views.Work.as_view(),name="submit_work"),
     path("portfolio_api/",views.PortfolioAPI.as_view(),name="portfolio"),
+    path("portfolio_api_with_img/",views.APIViewSet.as_view({'get': 'list'}),name="api"),
     path("logout/",views.logout_view,name="logout"),
 
 ]
