@@ -2,7 +2,7 @@
 
 PostFlikr is a website designed to help users create custom portfolios. It provides a user-friendly interface with essential features like a Get Started page, Login page, Registration page, and a Dashboard. Users can enter their personal details, project details, and work experiences in the Dashboard section. Once they are satisfied with their portfolio content, they can click on "Create Portfolio" to generate a unique Portfolio page.
 
-![alt](https://github.com/AltoTenor/PortFlikr/blob/master/Github%20Portflik.png)
+
 ## Table of Contents
 
 - [Features](#features)
@@ -21,7 +21,7 @@ PostFlikr offers the following features:
 - **Dashboard:** Provides a user-friendly interface for users to enter personal details like pictures,email,occupation,skill,hobbies, project details, and work experiences.
 - **Portfolio:** Generates a unique Portfolio page for users based on the content entered in the Dashboard.
 
-
+![alt](https://github.com/AltoTenor/PortFlikr/blob/master/Github%20Portflik.png)
 ## Tech Stacks
 
 PostFlikr is built using the following technologies:
@@ -34,6 +34,8 @@ PostFlikr is built using the following technologies:
 - **Axios:** A JavaScript library used to make API requests and handle communication between the frontend and backend.
 
 Please note that SQLite is used as the default database system in the Django framework. It is suitable for development and small-scale deployments. For larger-scale applications or production environments, you may consider using a more robust database system such as PostgreSQL or MySQL with Django.
+
+![alt](https://github.com/AltoTenor/PortFlikr/blob/master/table.png)
 
 ## Setup Instructions
 
