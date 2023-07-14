@@ -2,6 +2,7 @@
 
 PostFlikr is a website designed to help users create custom portfolios. It provides a user-friendly interface with essential features like a Get Started page, Login page, Registration page, and a Dashboard. Users can enter their personal details, project details, and work experiences in the Dashboard section. Once they are satisfied with their portfolio content, they can click on "Create Portfolio" to generate a unique Portfolio page.
 
+![alt](https://github.com/AltoTenor/PortFlikr/blob/master/Github%20Portflik.png)
 ## Table of Contents
 
 - [Features](#features)
