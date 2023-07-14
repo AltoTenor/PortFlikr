@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 class Person(models.Model):
+    img = models.ImageField(upload_to = "images/",null=True)
+    img1 = models.ImageField(upload_to = "images/",null=True)
     user = models.OneToOneField(User,on_delete=models.CASCADE) 
     linkedin = models.URLField(blank=True)
     github = models.URLField(blank=True)

@@ -12,6 +12,11 @@ from django.contrib.auth.views import LoginView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import HttpResponseNotFound
+from rest_framework import permissions,viewsets
+from rest_framework.parsers import MultiPartParser, FormParser
+from .serializer import Personserializer
+
+
 # from . serializer import *
 
 # Get Started Page.
@@ -80,8 +85,9 @@ class Dashboard(LoginRequiredMixin,View):
 class Profile(View):
     def post(self,request):
         #Forms and cleaning
-        form1=DashboardFormUser(request.POST)
-        form2=DashboardFormPersonal(request.POST)
+        form1=DashboardFormUser(request.POST, request.FILES)
+        form2=DashboardFormPersonal(request.POST, request.FILES)
+        print(form2)
         form1.is_valid()
         form2.is_valid()
         cleaned1=form1.cleaned_data
@@ -92,6 +98,11 @@ class Profile(View):
         # print(cleaned2)
 
         # Handling Data
+        print(cleaned2)
+        if 'img' in cleaned2:
+            request.user.person.img=cleaned2['img']
+        if 'img1' in cleaned2:
+            request.user.person.img1=cleaned2['img1']
         request.user.first_name=cleaned1['first_name']
         request.user.last_name=cleaned1['last_name']
         request.user.email=cleaned1['email']
@@ -245,6 +256,16 @@ class PortfolioAPI(APIView):
     #     if serializer.is_valid(raise_exception=True):
     #         serializer.save()
     #         return Response(serializer.data)
+
+class APIViewSet(viewsets.ModelViewSet):
+    queryset = Person.objects.order_by('id')
+    serializer_class = Personserializer
+    parser_classes = (MultiPartParser, FormParser)
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(creator=self.request.user)
 
 
 # LOGIN VIEW

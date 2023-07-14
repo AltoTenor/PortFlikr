@@ -89,10 +89,11 @@
 
         <div class="forms-first">
             <div class="formhead">Profile Settings</div>
-            <form class="actualform" method = "POST" action = "{% url 'pfapp:submit_profile'%}" novalidate>
+            <form class="actualform" method = "POST" action = "{% url 'pfapp:submit_profile'%}" novalidate enctype="multipart/form-data">
                 {% csrf_token %}
                 <!-- <input type="hidden" name="projectID" value="-1">
                 <input type="hidden" name="workID" value="-1"> -->
+                
                 <div class="half">
                     First Name
                     {% render_field user_form.first_name placeholder=user.first_name value=user.first_name class="formfields" %}
@@ -102,8 +103,16 @@
                     {% render_field user_form.last_name placeholder=user.last_name value=user.last_name class="formfields" %}
                 </div>
                 <div class="full">
-                    Username (If update fails try other usernames as it might be taken)
+                    Username (If update fails try other usernames)
                     {% render_field user_form.username placeholder=user.username value=user.username class="formfields" %}
+                </div>
+                <div class="halfmod">
+                    Profile Picture 1
+                    {% render_field personal_form.img  class="img-upload" %}
+                </div>
+                <div class="halfmod">
+                    About Me Picture 2
+                    {% render_field personal_form.img1  class="img-upload" %}
                 </div>
                 <div class="full">
                     Email
@@ -122,11 +131,11 @@
                     {% render_field personal_form.linkedin placeholder=user.person.linkedin value=user.person.linkedin class="formfields" %}
                 </div>
                 <div class="full">
-                    Skills
+                    Skills (Comma Seperated)
                     {% render_field personal_form.skills placeholder=user.person.skills value=user.person.skills class="formfields" %}
                 </div>
                 <div class="full">
-                    Hobbies
+                    Hobbies (Comma Seperated)
                     {% render_field personal_form.hobbies placeholder=user.person.hobbies value=user.person.hobbies class="formfields" %}
                 </div>
                 <div class="full">
@@ -266,9 +275,6 @@
             </form>
         </div>
     </div>
-
-
-
 
 
 
