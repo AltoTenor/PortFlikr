@@ -68,7 +68,7 @@ function showtabs(){
 
 function showcreate(){
     $('.make').fadeIn(div_fade_time);
-    console.log("hello");
+    // console.log("hello");
 }
 
 //Animation Cancel
@@ -152,3 +152,26 @@ $('[class^="tab--works"] a').click((e)=>{
     return false;
 })
 
+
+
+//Drop Down 
+$("[class^='tab--drop']").on('click',e=>{
+    animate_tab_drop_down(e.target.className);
+})
+
+var mode=0;
+
+function animate_tab_drop_down(class_var){
+    console.log();
+    if (mode===0){
+        $('.'+class_var).css("transform", "rotate(90deg)");
+        $('.tab--'+class_var.slice(10)+'-list').slideUp(200);
+    }
+    else{ 
+        $('.'+class_var).css("transform", "rotate(0deg)");
+        $('.tab--'+class_var.slice(10)+'-list').slideDown(200);
+    }
+
+    mode=1-mode
+    
+}

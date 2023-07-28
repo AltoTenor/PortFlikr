@@ -4,6 +4,7 @@ html,body{
     width: 100%;
     height: 100%;
     background-color: #fcfcf2;
+    
 }
 
 /* Loading */
@@ -69,7 +70,7 @@ html,body{
 .main{
     display: grid;
     margin: 9px 88px 0 88px;
-    grid-template-columns: 11fr 49fr;
+    grid-template-columns: 12fr 48fr;
     /* grid-template-rows: 3fr 10fr 3fr; */
 }
 
@@ -181,9 +182,27 @@ html,body{
 }
 
 .tab--logo{
-    height: 25px; 
+    height: 20px; 
     margin-right:5px;
 }
+
+
+[class^='tab--drop']{
+    content: url(../img/drop-gray.png);
+    margin-left: auto;
+    margin-top: 0;
+    height: 20px; 
+    margin-right:5px;
+    cursor: pointer;
+    transition-duration: 80ms;
+    transform: rotate(0deg);
+    
+}
+
+[class^='tab--drop']:hover{
+    content: url(../img/drop-blk.png);
+}
+
 
 h4{
     padding-left: 1rem;
