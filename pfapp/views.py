@@ -207,14 +207,6 @@ def logout_view(request):
 
 
 # PORTFOLIO VIEW
-class Portfolio(View):                                 
-    def get(self, request, num) :
-        print("here",num)
-        if (num=='1'):
-            return render(request,'pfapp/portfolio1.html',{'user':request.user})
-        elif (num=='X'):
-            return redirect("pfapp:dashboard")
-        # return render(request,'pfapp/portfolio1.html',{'user':request.user})
 
 class PortfolioAPI(APIView):
     # serializer_class = ReactSerializer
